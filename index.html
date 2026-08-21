@@ -45,8 +45,11 @@
       align-items: center;
       justify-content: center;
       font-size: 42px;
-      font-weight: bold;
       box-shadow: 0 0 25px rgba(22, 140, 255, 0.45);
+    }
+
+    .key-icon {
+      font-size: 48px;
     }
 
     h1 {
@@ -84,11 +87,55 @@
       width: 100%;
       padding: 14px;
       margin-top: 12px;
+      border: none;
       border-radius: 14px;
       background: #168cff;
       color: white;
       text-decoration: none;
       font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #087de8;
+    }
+
+    .key-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .key-input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px 10px;
+      border: 1px solid #168cff;
+      border-radius: 12px;
+      background: #071525;
+      color: white;
+      font-size: 13px;
+      text-align: center;
+      direction: ltr;
+    }
+
+    .copy-btn {
+      width: auto;
+      margin: 0;
+      padding: 13px 15px;
+      white-space: nowrap;
+    }
+
+    .success {
+      color: #42a5ff;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
@@ -97,7 +144,9 @@
 
   <div class="container">
 
-    <div class="logo">N10</div>
+    <div class="logo" id="logo">
+      N10
+    </div>
 
     <h1>N10 SERVER MENA</h1>
 
@@ -105,25 +154,99 @@
       مرحباً بكم في N10 SERVER MENA
     </p>
 
-    <div class="card">
-      <h2>أهلاً وسهلاً 👋</h2>
-      <p>
-        هذا هو الموقع الرسمي لـ N10 SERVER MENA.
-      </p>
+    <!-- الصفحة الرئيسية -->
+    <div id="home">
+
+      <div class="card">
+        <h2>أهلاً وسهلاً 👋</h2>
+        <p>
+          هذا هو الموقع الرسمي لـ N10 SERVER MENA.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>السيرفر</h2>
+
+        <p>
+          للدخول إلى السيرفر، قم بتسجيل الدخول بحساب Discord الخاص بك.
+        </p>
+
+        <a class="btn" href="https://YOUR-RENDER-URL.onrender.com/auth/discord">
+          دخول السيرفر
+        </a>
+      </div>
+
     </div>
 
-    <div class="card">
-      <h2>السيرفر</h2>
+    <!-- صفحة المفتاح -->
+    <div id="keyPage" class="card hidden">
+
+      <div class="success">
+        ✅ تم تسجيل الدخول بنجاح
+      </div>
+
+      <h2>🔑 مفتاح التفعيل</h2>
+
       <p>
-        جميع المعلومات والخدمات الخاصة بالسيرفر تجدها هنا.
+        هذا هو مفتاح التفعيل الخاص بك:
       </p>
 
-      <a class="btn" href="#">
-        دخول السيرفر
-      </a>
+      <div class="key-box">
+        <input
+          id="accessKey"
+          class="key-input"
+          type="text"
+          readonly
+        >
+
+        <button
+          class="btn copy-btn"
+          onclick="copyKey()"
+        >
+          📋 نسخ
+        </button>
+      </div>
+
+      <p id="copyMessage" style="margin-top:12px;"></p>
+
     </div>
 
   </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const accessKey = params.get("accessKey");
+
+    if (accessKey) {
+      document.getElementById("home").classList.add("hidden");
+      document.getElementById("keyPage").classList.remove("hidden");
+
+      document.getElementById("logo").innerHTML =
+        '<span class="key-icon">🔑</span>';
+
+      document.getElementById("accessKey").value = accessKey;
+    }
+
+    async function copyKey() {
+      const key = document.getElementById("accessKey").value;
+
+      try {
+        await navigator.clipboard.writeText(key);
+
+        document.getElementById("copyMessage").textContent =
+          "✅ تم نسخ المفتاح";
+
+      } catch (error) {
+        const input = document.getElementById("accessKey");
+
+        input.select();
+        document.execCommand("copy");
+
+        document.getElementById("copyMessage").textContent =
+          "✅ تم نسخ المفتاح";
+      }
+    }
+  </script>
 
 </body>
 </html>
