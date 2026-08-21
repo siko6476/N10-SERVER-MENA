@@ -142,74 +142,61 @@
 
 <body>
 
-  <div class="container">
+<div id="home">
 
-    <div class="logo" id="logo">
-      N10
-    </div>
+  <div class="card">
+    <h2>أهلاً وسهلاً 👋</h2>
+    <p>
+      هذا هو الموقع الرسمي لـ N10 SERVER MENA.
+    </p>
+  </div>
 
-    <h1>N10 SERVER MENA</h1>
+  <div class="card">
+    <h2>السيرفر</h2>
 
-    <p class="subtitle">
-      مرحباً بكم في N10 SERVER MENA
+    <p>
+      للدخول إلى السيرفر، قم بتسجيل الدخول بحساب Discord الخاص بك.
     </p>
 
-    <!-- الصفحة الرئيسية -->
-    <div id="home">
+    <a class="btn" href="https://n10-discord-backend-new.onrender.com/auth/discord">
+      دخول السيرفر
+    </a>
+  </div>
 
-      <div class="card">
-        <h2>أهلاً وسهلاً 👋</h2>
-        <p>
-          هذا هو الموقع الرسمي لـ N10 SERVER MENA.
-        </p>
-      </div>
+</div>
 
-      <div class="card">
-        <h2>السيرفر</h2>
+<!-- صفحة المفتاح -->
+<div id="keyPage" class="card hidden">
 
-        <p>
-          للدخول إلى السيرفر، قم بتسجيل الدخول بحساب Discord الخاص بك.
-        </p>
+  <div class="success">
+    ✅ تم تسجيل الدخول بنجاح
+  </div>
 
-        <a class="btn" href="https://YOUR-RENDER-URL.onrender.com/auth/discord">
-          دخول السيرفر
-        </a>
-      </div>
+  <h2>🔑 مفتاح التفعيل</h2>
 
-    </div>
+  <p>
+    هذا هو مفتاح التفعيل الخاص بك:
+  </p>
 
-    <!-- صفحة المفتاح -->
-    <div id="keyPage" class="card hidden">
+  <div class="key-box">
+    <input
+      id="accessKey"
+      class="key-input"
+      type="text"
+      readonly
+    >
 
-      <div class="success">
-        ✅ تم تسجيل الدخول بنجاح
-      </div>
+    <button
+      class="btn copy-btn"
+      onclick="copyKey()"
+    >
+      📋 نسخ
+    </button>
+  </div>
 
-      <h2>🔑 مفتاح التفعيل</h2>
+  <p id="copyMessage" style="margin-top:12px;"></p>
 
-      <p>
-        هذا هو مفتاح التفعيل الخاص بك:
-      </p>
-
-      <div class="key-box">
-        <input
-          id="accessKey"
-          class="key-input"
-          type="text"
-          readonly
-        >
-
-        <button
-          class="btn copy-btn"
-          onclick="copyKey()"
-        >
-          📋 نسخ
-        </button>
-      </div>
-
-      <p id="copyMessage" style="margin-top:12px;"></p>
-
-    </div>
+</div>
 
   </div>
 
