@@ -1,3 +1,5 @@
+login.html
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -17,6 +19,7 @@
 
     body {
       min-height: 100vh;
+
       background:
         radial-gradient(
           circle at top,
@@ -79,13 +82,17 @@
 
     h1 {
       color: #42a5ff;
+
       font-size: 28px;
+
       margin-bottom: 8px;
     }
 
     .subtitle {
       color: #a9c9e8;
+
       font-size: 14px;
+
       margin-bottom: 25px;
     }
 
@@ -156,6 +163,8 @@
     }
 
     input:focus {
+      border-color: #42a5ff;
+
       box-shadow:
         0 0 12px rgba(22, 140, 255, 0.3);
     }
@@ -180,10 +189,18 @@
       font-size: 16px;
 
       cursor: pointer;
+
+      transition: 0.2s;
     }
 
     .btn:hover {
       background: #087de8;
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+
+      cursor: not-allowed;
     }
 
     #message {
@@ -194,6 +211,8 @@
       text-align: center;
 
       font-size: 14px;
+
+      line-height: 1.5;
     }
 
     .success {
@@ -234,6 +253,7 @@
   </style>
 </head>
 
+
 <body>
 
   <div class="container">
@@ -242,19 +262,28 @@
       N10
     </div>
 
-    <h1>N10 SERVER MENA</h1>
+
+    <h1>
+      N10 SERVER MENA
+    </h1>
+
 
     <p class="subtitle">
       تسجيل الدخول إلى حسابك
     </p>
 
+
     <div class="card">
 
-      <h2>🔐 تسجيل الدخول</h2>
+      <h2>
+        🔐 تسجيل الدخول
+      </h2>
+
 
       <p class="description">
         أدخل اسم المستخدم وكلمة المرور للدخول إلى حسابك.
       </p>
+
 
       <form id="loginForm">
 
@@ -266,6 +295,7 @@
 
           <input
             id="username"
+            name="username"
             type="text"
             placeholder="Username"
             autocomplete="username"
@@ -276,6 +306,7 @@
 
         </div>
 
+
         <div class="form-group">
 
           <label for="password">
@@ -284,6 +315,7 @@
 
           <input
             id="password"
+            name="password"
             type="password"
             placeholder="Password"
             autocomplete="current-password"
@@ -293,6 +325,7 @@
 
         </div>
 
+
         <button
           id="loginButton"
           class="btn"
@@ -301,9 +334,11 @@
           LOGIN
         </button>
 
+
         <p id="message"></p>
 
       </form>
+
 
       <div class="links">
 
@@ -319,10 +354,20 @@
 
   </div>
 
+
   <script>
+
+    /*
+      رابط السيرفر
+    */
 
     const API_URL =
       "https://n10-discord-backend-new.onrender.com";
+
+
+    /*
+      عناصر الصفحة
+    */
 
     const form =
       document.getElementById("loginForm");
@@ -333,39 +378,73 @@
     const loginButton =
       document.getElementById("loginButton");
 
+    const usernameInput =
+      document.getElementById("username");
+
+    const passwordInput =
+      document.getElementById("password");
+
+
+    /*
+      تسجيل الدخول
+    */
 
     form.addEventListener("submit", async (e) => {
 
       e.preventDefault();
 
+
+      /*
+        أخذ البيانات
+      */
+
       const username =
-        document
-          .getElementById("username")
-          .value
-          .trim();
+        usernameInput.value.trim();
 
       const password =
-        document
-          .getElementById("password")
-          .value;
+        passwordInput.value;
 
 
-      if (!username || !password) {
+      /*
+        التحقق من البيانات
+      */
+
+      if (!username) {
 
         message.className = "error";
 
         message.textContent =
-          "الرجاء إدخال اسم المستخدم وكلمة المرور.";
+          "الرجاء إدخال اسم المستخدم.";
+
+        usernameInput.focus();
 
         return;
       }
 
+
+      if (!password) {
+
+        message.className = "error";
+
+        message.textContent =
+          "الرجاء إدخال كلمة المرور.";
+
+        passwordInput.focus();
+
+        return;
+      }
+
+
+      /*
+        حالة التحميل
+      */
 
       message.className = "";
 
       message.textContent =
         "جاري تسجيل الدخول...";
 
+      loginButton.disabled = true;
 
       loginButton.classList.add("loading");
 
@@ -375,6 +454,10 @@
 
       try {
 
+        /*
+          إرسال طلب تسجيل الدخول
+        */
+
         const response =
           await fetch(
             `${API_URL}/api/login`,
@@ -383,6 +466,9 @@
 
               headers: {
                 "Content-Type":
+                  "application/json",
+
+                "Accept":
                   "application/json"
               },
 
@@ -395,25 +481,40 @@
 
 
         /*
-          نحاول قراءة الرد بشكل آمن
+          قراءة رد السيرفر
+          بطريقة آمنة
         */
 
         let data = {};
 
-        try {
+        const contentType =
+          response.headers.get(
+            "content-type"
+          ) || "";
 
-          data =
-            await response.json();
 
-        } catch {
+        if (
+          contentType.includes(
+            "application/json"
+          )
+        ) {
 
-          data = {};
+          try {
+
+            data =
+              await response.json();
+
+          } catch {
+
+            data = {};
+
+          }
 
         }
 
 
         /*
-          إذا كان تسجيل الدخول فاشل
+          تسجيل الدخول فشل
         */
 
         if (!response.ok) {
@@ -429,7 +530,8 @@
 
 
         /*
-          التأكد من وجود معلومات المستخدم
+          حفظ معلومات المستخدم
+          إذا أرسلها السيرفر
         */
 
         if (data.user) {
@@ -444,89 +546,115 @@
 
         /*
           البحث عن Access Key
-          مهما كان مكانه في رد السيرفر
         */
 
         const accessKey =
           data.accessKey ||
-          (data.user && data.user.accessKey) ||
-          (data.user && data.user.access_key) ||
+          data.access_key ||
+          (
+            data.user &&
+            (
+              data.user.accessKey ||
+              data.user.access_key
+            )
+          ) ||
           null;
 
 
         /*
-          تسجيل الدخول نجح
+          نجاح تسجيل الدخول
         */
 
-        message.className = "success";
+        message.className =
+          "success";
 
         message.textContent =
           "✅ تم تسجيل الدخول بنجاح!";
 
 
         /*
-          إذا كان السيرفر أعطانا Access Key
-          نرسله مباشرة إلى صفحة index
+          إذا وجدنا Access Key
         */
 
         if (accessKey) {
 
+          /*
+            حفظ المفتاح محلياً
+          */
+
+          localStorage.setItem(
+            "n10AccessKey",
+            accessKey
+          );
+
+
+          /*
+            تحويل المستخدم
+            إلى الصفحة الرئيسية
+          */
+
           setTimeout(() => {
 
             window.location.href =
-              `./index.html?accessKey=${encodeURIComponent(accessKey)}`;
+              "./index.html";
 
-          }, 700);
+          }, 800);
 
           return;
         }
 
 
         /*
-          إذا لم يرجع السيرفر Access Key
+          إذا لم يوجد Access Key
         */
 
-        if (data.user && data.user.username) {
+        if (
+          data.user &&
+          data.user.username
+        ) {
 
           setTimeout(() => {
 
             message.textContent =
               `✅ مرحباً ${data.user.username}`;
 
-          }, 700);
+          }, 800);
 
         }
 
 
       } catch (error) {
 
+        /*
+          خطأ في الاتصال بالسيرفر
+        */
+
         console.error(
-          "Login Error:",
+          "N10 Login Error:",
           error
         );
 
-        message.className = "error";
+
+        message.className =
+          "error";
 
         message.textContent =
-          "❌ تعذر الاتصال بسيرفر N10.";
+          "❌ تعذر الاتصال بسيرفر N10. حاول مرة أخرى.";
 
       } finally {
 
         /*
-          نرجع الزر لحالته الطبيعية
-          فقط إذا ما راحش نديرو Redirect
+          إعادة الزر لحالته الطبيعية
         */
 
-        setTimeout(() => {
+        loginButton.disabled = false;
 
-          loginButton.classList.remove(
-            "loading"
-          );
+        loginButton.classList.remove(
+          "loading"
+        );
 
-          loginButton.textContent =
-            "LOGIN";
-
-        }, 800);
+        loginButton.textContent =
+          "LOGIN";
 
       }
 
@@ -535,4 +663,5 @@
   </script>
 
 </body>
+
 </html>
