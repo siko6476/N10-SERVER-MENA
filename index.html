@@ -17,12 +17,7 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(
-          circle at top,
-          #123b70 0%,
-          #071525 45%,
-          #03070d 100%
-        );
+        radial-gradient(circle at top, #123b70 0%, #071525 45%, #03070d 100%);
       color: white;
       display: flex;
       justify-content: center;
@@ -33,7 +28,7 @@
     .container {
       width: 100%;
       max-width: 430px;
-      background: rgba(8, 20, 36, 0.94);
+      background: rgba(8, 20, 36, 0.95);
       border: 1px solid #168cff;
       border-radius: 24px;
       padding: 30px 22px;
@@ -68,7 +63,7 @@
     .subtitle {
       color: #a9c9e8;
       font-size: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
     .card {
@@ -108,6 +103,74 @@
       background: #087de8;
     }
 
+    .form-group {
+      text-align: right;
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #a9c9e8;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #168cff;
+      border-radius: 12px;
+      background: #071525;
+      color: white;
+      outline: none;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .form-group input:focus {
+      box-shadow: 0 0 12px rgba(22, 140, 255, 0.25);
+    }
+
+    .human {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #071525;
+      border: 1px solid #23415e;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 15px 0;
+      color: #c8d9e8;
+      font-size: 13px;
+    }
+
+    .human input {
+      width: 18px;
+      height: 18px;
+      accent-color: #168cff;
+    }
+
+    #message {
+      min-height: 22px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #ff5555;
+    }
+
+    .switch {
+      color: #a9c9e8;
+      font-size: 13px;
+      margin-top: 16px;
+    }
+
+    .switch button {
+      background: none;
+      border: none;
+      color: #42a5ff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .key-box {
       display: flex;
       align-items: center;
@@ -142,7 +205,34 @@
     }
 
     .hidden {
-      display: none;
+      display: none !important;
+    }
+
+    .cookie {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92%, 430px);
+      background: #071525;
+      border: 1px solid #23415e;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: #a9c9e8;
+    }
+
+    .cookie button {
+      border: 0;
+      background: #168cff;
+      color: white;
+      border-radius: 8px;
+      padding: 7px 14px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -151,7 +241,6 @@
 
   <div class="container">
 
-    <!-- الشعار -->
     <div class="logo" id="logo">
       N10
     </div>
@@ -162,35 +251,178 @@
       مرحباً بكم في N10 SERVER MENA
     </p>
 
+
     <!-- الصفحة الرئيسية -->
+
     <div id="home">
 
       <div class="card">
+
         <h2>أهلاً وسهلاً 👋</h2>
 
         <p>
           هذا هو الموقع الرسمي لـ N10 SERVER MENA.
         </p>
+
       </div>
 
+
       <div class="card">
+
         <h2>السيرفر</h2>
 
         <p>
-          للدخول إلى السيرفر، قم بتسجيل الدخول بحساب Discord الخاص بك.
+          سجل دخولك عبر Discord للحصول على Access Key.
         </p>
 
         <a
           class="btn"
           href="https://n10-discord-backend-new.onrender.com/auth/discord"
         >
-          دخول السيرفر
+          دخول Discord
         </a>
+
+        <button
+          class="btn"
+          onclick="showRegister()"
+        >
+          إنشاء حساب
+        </button>
+
       </div>
 
     </div>
 
+
+    <!-- إنشاء حساب -->
+
+    <div id="registerPage" class="card hidden">
+
+      <h2>إنشاء حساب</h2>
+
+      <p>
+        أنشئ حسابك في N10 SERVER MENA
+      </p>
+
+      <br>
+
+      <form id="registerForm">
+
+        <div class="form-group">
+
+          <label for="username">
+            اسم المستخدم
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            minlength="3"
+            maxlength="24"
+            placeholder="Username"
+            autocomplete="username"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            كلمة المرور
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            minlength="6"
+            placeholder="Password"
+            autocomplete="new-password"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="confirm">
+            تأكيد كلمة المرور
+          </label>
+
+          <input
+            id="confirm"
+            type="password"
+            minlength="6"
+            placeholder="Confirm Password"
+            autocomplete="new-password"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="key">
+            Access Key
+          </label>
+
+          <input
+            id="key"
+            type="text"
+            placeholder="N10-..."
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <label class="human">
+
+          <input
+            id="human"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            أنا إنسان
+          </span>
+
+        </label>
+
+
+        <button
+          class="btn"
+          type="submit"
+        >
+          REGISTER
+        </button>
+
+
+        <p id="message"></p>
+
+      </form>
+
+
+      <div class="switch">
+
+        عندك حساب؟
+
+        <button onclick="showHome()">
+          رجوع
+        </button>
+
+      </div>
+
+    </div>
+
+
     <!-- صفحة المفتاح -->
+
     <div id="keyPage" class="card hidden">
 
       <div class="success">
@@ -202,6 +434,7 @@
       <p>
         هذا هو مفتاح التفعيل الخاص بك:
       </p>
+
 
       <div class="key-box">
 
@@ -221,6 +454,7 @@
 
       </div>
 
+
       <p
         id="copyMessage"
         style="margin-top:12px;"
@@ -230,14 +464,64 @@
 
   </div>
 
+
+  <!-- Cookies -->
+
+  <div class="cookie">
+
+    <span>
+      🍪 نستخدم ملفات Cookies لتحسين تجربتك.
+    </span>
+
+    <button type="button">
+      OK
+    </button>
+
+  </div>
+
+
   <script>
 
-    /* قراءة مفتاح التفعيل من الرابط */
-    const params = new URLSearchParams(window.location.search);
-    const accessKey = params.get("accessKey");
+    const params =
+      new URLSearchParams(window.location.search);
 
-    /* إذا كان هناك مفتاح، نعرض صفحة المفتاح */
-    if (accessKey) {
+    const discordAccessKey =
+      params.get("accessKey");
+
+
+    /*
+      إظهار الصفحة الرئيسية
+    */
+
+    function showHome() {
+
+      document
+        .getElementById("home")
+        .classList
+        .remove("hidden");
+
+      document
+        .getElementById("registerPage")
+        .classList
+        .add("hidden");
+
+      document
+        .getElementById("keyPage")
+        .classList
+        .add("hidden");
+
+      document
+        .getElementById("logo")
+        .innerHTML = "N10";
+
+    }
+
+
+    /*
+      إظهار إنشاء الحساب
+    */
+
+    function showRegister() {
 
       document
         .getElementById("home")
@@ -245,23 +529,50 @@
         .add("hidden");
 
       document
-        .getElementById("keyPage")
+        .getElementById("registerPage")
         .classList
         .remove("hidden");
 
-      /* تغيير الشعار إلى مفتاح */
+      document
+        .getElementById("keyPage")
+        .classList
+        .add("hidden");
+
       document
         .getElementById("logo")
-        .innerHTML =
-        '<span class="key-icon">🔑</span>';
+        .innerHTML = "N10";
 
-      /* وضع المفتاح داخل الخانة */
-      document
-        .getElementById("accessKey")
-        .value = accessKey;
     }
 
-    /* نسخ المفتاح */
+
+    /*
+      إذا رجع المستخدم من Discord
+      ومعه Access Key
+    */
+
+    if (discordAccessKey) {
+
+      document
+        .getElementById("home")
+        .classList
+        .add("hidden");
+
+      document
+        .getElementById("registerPage")
+        .classList
+        .remove("hidden");
+
+      document
+        .getElementById("key")
+        .value = discordAccessKey;
+
+    }
+
+
+    /*
+      نسخ Access Key
+    */
+
     async function copyKey() {
 
       const key =
@@ -278,7 +589,7 @@
           .textContent =
           "✅ تم نسخ المفتاح";
 
-      } catch (error) {
+      } catch {
 
         const input =
           document
@@ -292,10 +603,38 @@
           .getElementById("copyMessage")
           .textContent =
           "✅ تم نسخ المفتاح";
+
       }
+
+    }
+
+
+    /*
+      Cookies
+    */
+
+    const cookieButton =
+      document.querySelector(".cookie button");
+
+    if (cookieButton) {
+
+      cookieButton.addEventListener("click", () => {
+
+        const cookie =
+          document.querySelector(".cookie");
+
+        if (cookie) {
+          cookie.remove();
+        }
+
+      });
+
     }
 
   </script>
+
+
+  <script src="script.js"></script>
 
 </body>
 </html>
