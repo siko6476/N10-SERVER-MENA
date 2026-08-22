@@ -25,4 +25,451 @@
           #03070d 100%
         );
 
-      color:
+      color: white;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+
+      background: rgba(8, 20, 36, 0.95);
+
+      border: 1px solid #168cff;
+      border-radius: 24px;
+
+      padding: 30px 22px;
+
+      box-shadow:
+        0 0 35px rgba(0, 140, 255, 0.25);
+
+      text-align: center;
+    }
+
+    .logo {
+      width: 95px;
+      height: 95px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #168cff,
+          #0051a8
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 38px;
+      font-weight: bold;
+
+      box-shadow:
+        0 0 25px rgba(22, 140, 255, 0.45);
+    }
+
+    h1 {
+      color: #42a5ff;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #a9c9e8;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+
+      border-radius: 16px;
+
+      padding: 20px;
+
+      text-align: right;
+    }
+
+    .card h2 {
+      color: #42a5ff;
+
+      text-align: center;
+
+      margin-bottom: 8px;
+    }
+
+    .description {
+      color: #c8d9e8;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+
+      text-align: center;
+
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+
+      color: #a9c9e8;
+
+      font-size: 13px;
+
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+
+      padding: 14px;
+
+      border: 1px solid #168cff;
+
+      border-radius: 12px;
+
+      background: #071525;
+
+      color: white;
+
+      outline: none;
+
+      font-size: 15px;
+
+      direction: ltr;
+
+      text-align: left;
+    }
+
+    input:focus {
+      box-shadow:
+        0 0 12px rgba(22, 140, 255, 0.3);
+    }
+
+    .btn {
+      width: 100%;
+
+      padding: 14px;
+
+      margin-top: 8px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background: #168cff;
+
+      color: white;
+
+      font-weight: bold;
+
+      font-size: 16px;
+
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #087de8;
+    }
+
+    #message {
+      min-height: 22px;
+
+      margin-top: 15px;
+
+      text-align: center;
+
+      font-size: 14px;
+    }
+
+    .success {
+      color: #5cff8a;
+    }
+
+    .error {
+      color: #ff5555;
+    }
+
+    .links {
+      text-align: center;
+
+      margin-top: 20px;
+
+      color: #a9c9e8;
+
+      font-size: 13px;
+    }
+
+    .links a {
+      color: #42a5ff;
+
+      text-decoration: none;
+
+      font-weight: bold;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .loading {
+      opacity: 0.7;
+
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      N10
+    </div>
+
+    <h1>N10 SERVER MENA</h1>
+
+    <p class="subtitle">
+      تسجيل الدخول إلى حسابك
+    </p>
+
+
+    <div class="card">
+
+      <h2>🔐 تسجيل الدخول</h2>
+
+      <p class="description">
+        أدخل اسم المستخدم وكلمة المرور للدخول إلى حسابك.
+      </p>
+
+
+      <form id="loginForm">
+
+        <div class="form-group">
+
+          <label for="username">
+            اسم المستخدم
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            placeholder="Username"
+            autocomplete="username"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            كلمة المرور
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+
+        <button
+          id="loginButton"
+          class="btn"
+          type="submit"
+        >
+          LOGIN
+        </button>
+
+
+        <p id="message"></p>
+
+      </form>
+
+
+      <div class="links">
+
+        ما عندكش حساب؟
+
+        <a href="./index.html">
+          إنشاء حساب
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const API_URL =
+      "https://n10-discord-backend-new.onrender.com";
+
+
+    const form =
+      document.getElementById("loginForm");
+
+    const message =
+      document.getElementById("message");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+
+    form.addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+
+      const username =
+        document
+          .getElementById("username")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("password")
+          .value;
+
+
+      message.className = "";
+      message.textContent =
+        "جاري تسجيل الدخول...";
+
+
+      loginButton.classList.add("loading");
+      loginButton.textContent =
+        "جاري الدخول...";
+
+
+      if (!username || !password) {
+
+        message.className = "error";
+
+        message.textContent =
+          "الرجاء إدخال اسم المستخدم وكلمة المرور.";
+
+        loginButton.classList.remove("loading");
+        loginButton.textContent = "LOGIN";
+
+        return;
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_URL}/api/login`,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                username: username,
+                password: password
+              })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          message.className = "error";
+
+          message.textContent =
+            data.message ||
+            "اسم المستخدم أو كلمة المرور غير صحيحة.";
+
+          return;
+        }
+
+
+        message.className = "success";
+
+        message.textContent =
+          "✅ تم تسجيل الدخول بنجاح!";
+
+
+        /*
+          حفظ معلومات المستخدم محليًا
+        */
+
+        localStorage.setItem(
+          "n10User",
+          JSON.stringify(data.user)
+        );
+
+
+        /*
+          بعد نجاح تسجيل الدخول
+          ننتظر قليلاً ثم نعرض رسالة النجاح
+        */
+
+        setTimeout(() => {
+
+          message.textContent =
+            `✅ مرحباً ${data.user.username}`;
+
+        }, 800);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        message.className = "error";
+
+        message.textContent =
+          "❌ تعذر الاتصال بسيرفر N10.";
+
+      } finally {
+
+        loginButton.classList.remove(
+          "loading"
+        );
+
+        loginButton.textContent =
+          "LOGIN";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
