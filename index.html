@@ -42,8 +42,7 @@
       border: 1px solid #168cff;
       border-radius: 24px;
       padding: 30px 22px;
-      box-shadow:
-        0 0 35px rgba(0, 140, 255, 0.25);
+      box-shadow: 0 0 35px rgba(0, 140, 255, 0.25);
       text-align: center;
     }
 
@@ -52,19 +51,13 @@
       height: 95px;
       margin: 0 auto 18px;
       border-radius: 24px;
-      background:
-        linear-gradient(
-          145deg,
-          #168cff,
-          #0051a8
-        );
+      background: linear-gradient(145deg, #168cff, #0051a8);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 42px;
       font-weight: bold;
-      box-shadow:
-        0 0 25px rgba(22, 140, 255, 0.45);
+      box-shadow: 0 0 25px rgba(22, 140, 255, 0.45);
     }
 
     h1 {
@@ -152,9 +145,7 @@
 
     .form-group input:focus {
       border-color: #42a5ff;
-      box-shadow:
-        0 0 12px
-        rgba(22, 140, 255, 0.25);
+      box-shadow: 0 0 12px rgba(22, 140, 255, 0.25);
     }
 
     .human {
@@ -196,13 +187,23 @@
     }
 
     .discord-info {
-      background:
-        rgba(22, 140, 255, 0.08);
+      background: rgba(22, 140, 255, 0.08);
       border: 1px solid #23415e;
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 15px;
       color: #c8d9e8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .new-key-info {
+      background: rgba(92, 255, 138, 0.08);
+      border: 1px solid rgba(92, 255, 138, 0.35);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 15px;
+      color: #bfffd0;
       font-size: 13px;
       line-height: 1.6;
     }
@@ -256,6 +257,13 @@
       font-weight: bold;
       text-decoration: none;
     }
+
+    .small-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #8daac2;
+      line-height: 1.6;
+    }
   </style>
 </head>
 
@@ -263,10 +271,7 @@
 
   <div class="container">
 
-    <div
-      class="logo"
-      id="logo"
-    >
+    <div class="logo">
       N10
     </div>
 
@@ -276,7 +281,10 @@
       مرحباً بكم في N10 SERVER MENA
     </p>
 
-    <!-- HOME -->
+
+    <!-- =========================
+         HOME
+    ========================== -->
 
     <div id="home">
 
@@ -292,6 +300,7 @@
 
       </div>
 
+
       <div class="card">
 
         <h2>
@@ -299,10 +308,11 @@
         </h2>
 
         <p>
-          سجل دخولك عبر Discord للحصول على Access Key.
+          سجل دخولك عبر Discord للحصول على Access Key جديد.
         </p>
 
         <a
+          id="discordButton"
           class="btn"
           href="https://n10-discord-backend-new.onrender.com/auth/discord"
         >
@@ -329,7 +339,10 @@
 
     </div>
 
-    <!-- REGISTER -->
+
+    <!-- =========================
+         REGISTER
+    ========================== -->
 
     <div
       id="registerPage"
@@ -346,6 +359,17 @@
 
       <br>
 
+
+      <div
+        id="newKeyInfo"
+        class="new-key-info hidden"
+      >
+        ✅ تم استلام Access Key جديد من Discord.
+        <br>
+        تم حذف المفتاح القديم من المتصفح واستعمال المفتاح الجديد.
+      </div>
+
+
       <div
         id="discordInfo"
         class="discord-info hidden"
@@ -353,6 +377,7 @@
         ✅ تم الحصول على Access Key من Discord.
         يمكنك الآن إنشاء حسابك.
       </div>
+
 
       <form id="registerForm">
 
@@ -374,6 +399,7 @@
 
         </div>
 
+
         <div class="form-group">
 
           <label for="password">
@@ -391,6 +417,7 @@
           >
 
         </div>
+
 
         <div class="form-group">
 
@@ -410,6 +437,7 @@
 
         </div>
 
+
         <div class="form-group">
 
           <label for="key">
@@ -426,6 +454,7 @@
 
         </div>
 
+
         <label class="human">
 
           <input
@@ -440,6 +469,7 @@
 
         </label>
 
+
         <button
           id="registerButtonSubmit"
           class="btn"
@@ -448,9 +478,11 @@
           REGISTER
         </button>
 
+
         <p id="message"></p>
 
       </form>
+
 
       <div
         style="
@@ -490,7 +522,89 @@
 
     </div>
 
-    <!-- KEY PAGE -->
+
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <div
+      id="loginPage"
+      class="card hidden"
+    >
+
+      <h2>
+        تسجيل الدخول
+      </h2>
+
+      <p>
+        سجل الدخول إلى حسابك
+      </p>
+
+      <br>
+
+
+      <form id="loginForm">
+
+        <div class="form-group">
+
+          <label for="loginUsername">
+            اسم المستخدم
+          </label>
+
+          <input
+            id="loginUsername"
+            type="text"
+            autocomplete="username"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="loginPassword">
+            كلمة المرور
+          </label>
+
+          <input
+            id="loginPassword"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+
+        <button
+          id="loginSubmit"
+          class="btn"
+          type="submit"
+        >
+          LOGIN
+        </button>
+
+
+        <p id="loginMessage"></p>
+
+      </form>
+
+
+      <button
+        id="backFromLogin"
+        class="btn secondary-btn"
+        type="button"
+      >
+        رجوع
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         KEY PAGE
+    ========================== -->
 
     <div
       id="keyPage"
@@ -508,6 +622,7 @@
       <p>
         هذا هو مفتاح التفعيل الخاص بك:
       </p>
+
 
       <div class="key-box">
 
@@ -528,10 +643,12 @@
 
       </div>
 
+
       <p
         id="copyMessage"
         style="margin-top:12px;"
       ></p>
+
 
       <button
         id="logoutButton"
@@ -545,7 +662,1106 @@
 
   </div>
 
-  <script src="./script.js"></script>
+
+  <!-- =====================================================
+       JAVASCRIPT
+       لا يوجد script.js خارجي
+  ====================================================== -->
+
+  <script>
+
+    "use strict";
+
+
+    /* =====================================================
+       CONFIG
+    ===================================================== */
+
+    const API_URL =
+      "https://n10-discord-backend-new.onrender.com";
+
+
+    /* =====================================================
+       DOM
+    ===================================================== */
+
+    const home =
+      document.getElementById("home");
+
+    const registerPage =
+      document.getElementById("registerPage");
+
+    const loginPage =
+      document.getElementById("loginPage");
+
+    const keyPage =
+      document.getElementById("keyPage");
+
+    const registerButton =
+      document.getElementById("registerButton");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const loginFromRegister =
+      document.getElementById("loginFromRegister");
+
+    const backButton =
+      document.getElementById("backButton");
+
+    const backFromLogin =
+      document.getElementById("backFromLogin");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+    const registerForm =
+      document.getElementById("registerForm");
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const registerButtonSubmit =
+      document.getElementById(
+        "registerButtonSubmit"
+      );
+
+    const loginSubmit =
+      document.getElementById(
+        "loginSubmit"
+      );
+
+    const message =
+      document.getElementById("message");
+
+    const loginMessage =
+      document.getElementById(
+        "loginMessage"
+      );
+
+    const keyInput =
+      document.getElementById("key");
+
+    const accessKey =
+      document.getElementById(
+        "accessKey"
+      );
+
+    const copyButton =
+      document.getElementById(
+        "copyButton"
+      );
+
+    const copyMessage =
+      document.getElementById(
+        "copyMessage"
+      );
+
+    const discordInfo =
+      document.getElementById(
+        "discordInfo"
+      );
+
+    const newKeyInfo =
+      document.getElementById(
+        "newKeyInfo"
+      );
+
+
+    /* =====================================================
+       STORAGE KEYS
+    ====================================================== */
+
+    const STORAGE_ACCESS_KEY =
+      "n10_access_key";
+
+    const STORAGE_SESSION =
+      "n10_session_token";
+
+
+    /* =====================================================
+       SHOW PAGE
+    ====================================================== */
+
+    function showOnly(page) {
+
+      home.classList.add("hidden");
+
+      registerPage.classList.add("hidden");
+
+      loginPage.classList.add("hidden");
+
+      keyPage.classList.add("hidden");
+
+
+      if (page) {
+        page.classList.remove("hidden");
+      }
+    }
+
+
+    /* =====================================================
+       CLEAR OLD AUTH DATA
+       مهم جداً:
+       نمسح المفتاح القديم قبل استعمال الجديد
+    ====================================================== */
+
+    function clearOldKey() {
+
+      localStorage.removeItem(
+        STORAGE_ACCESS_KEY
+      );
+
+      sessionStorage.removeItem(
+        STORAGE_ACCESS_KEY
+      );
+
+      if (keyInput) {
+        keyInput.value = "";
+      }
+
+      if (accessKey) {
+        accessKey.value = "";
+      }
+    }
+
+
+    function clearAllAuth() {
+
+      localStorage.removeItem(
+        STORAGE_ACCESS_KEY
+      );
+
+      localStorage.removeItem(
+        STORAGE_SESSION
+      );
+
+      sessionStorage.removeItem(
+        STORAGE_ACCESS_KEY
+      );
+
+      sessionStorage.removeItem(
+        STORAGE_SESSION
+      );
+
+      clearUrlParameters();
+    }
+
+
+    /* =====================================================
+       SAVE NEW KEY
+       لا نستعمل القديم أبداً
+    ====================================================== */
+
+    function saveNewAccessKey(newKey) {
+
+      if (
+        typeof newKey !== "string"
+      ) {
+        return false;
+      }
+
+      newKey =
+        newKey.trim();
+
+      if (
+        !/^N10-[A-Za-z0-9]+$/.test(
+          newKey
+        )
+      ) {
+        return false;
+      }
+
+
+      /*
+        أول شيء:
+        حذف القديم
+      */
+
+      clearOldKey();
+
+
+      /*
+        بعدها:
+        حفظ الجديد
+      */
+
+      localStorage.setItem(
+        STORAGE_ACCESS_KEY,
+        newKey
+      );
+
+
+      /*
+        نضع الجديد في الصفحة
+      */
+
+      keyInput.value =
+        newKey;
+
+      accessKey.value =
+        newKey;
+
+
+      return true;
+    }
+
+
+    /* =====================================================
+       GET SAVED KEY
+    ====================================================== */
+
+    function getSavedKey() {
+
+      const key =
+        localStorage.getItem(
+          STORAGE_ACCESS_KEY
+        );
+
+      if (
+        typeof key !== "string"
+      ) {
+        return "";
+      }
+
+      if (
+        !/^N10-[A-Za-z0-9]+$/.test(
+          key.trim()
+        )
+      ) {
+        return "";
+      }
+
+      return key.trim();
+    }
+
+
+    /* =====================================================
+       URL
+    ====================================================== */
+
+    function clearUrlParameters() {
+
+      try {
+
+        const cleanUrl =
+          window.location.origin +
+          window.location.pathname;
+
+        window.history.replaceState(
+          {},
+          document.title,
+          cleanUrl
+        );
+
+      } catch (error) {
+
+        console.error(
+          "URL cleanup error:",
+          error
+        );
+      }
+    }
+
+
+    /* =====================================================
+       DISCORD CALLBACK
+       
+       Backend يرجع:
+       ?success=true
+       &accessKey=N10-xxxx
+       &discordId=...
+       
+       كل مرة يوجد accessKey:
+       نحذف القديم ونحفظ الجديد.
+    ====================================================== */
+
+    function processDiscordCallback() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      const newKey =
+        params.get(
+          "accessKey"
+        );
+
+
+      const success =
+        params.get(
+          "success"
+        );
+
+
+      const discordError =
+        params.get(
+          "discordError"
+        );
+
+
+      /* ===================================================
+         DISCORD ERROR
+      =================================================== */
+
+      if (discordError) {
+
+        clearOldKey();
+
+        showOnly(home);
+
+        alert(
+          discordError
+        );
+
+        clearUrlParameters();
+
+        return;
+      }
+
+
+      /* ===================================================
+         NEW ACCESS KEY
+         
+         أهم جزء
+      =================================================== */
+
+      if (newKey) {
+
+        /*
+          حذف أي Key قديم
+          ثم حفظ الجديد
+        */
+
+        const saved =
+          saveNewAccessKey(
+            newKey
+          );
+
+
+        if (!saved) {
+
+          clearOldKey();
+
+          showOnly(home);
+
+          alert(
+            "Discord أرسل Access Key غير صالح."
+          );
+
+          clearUrlParameters();
+
+          return;
+        }
+
+
+        /*
+          المفتاح الجديد موجود
+        */
+
+        if (
+          success === "true"
+        ) {
+
+          newKeyInfo.classList.remove(
+            "hidden"
+          );
+
+          discordInfo.classList.remove(
+            "hidden"
+          );
+
+
+          /*
+            ضع المفتاح الجديد
+            في خانة التسجيل
+          */
+
+          keyInput.value =
+            newKey;
+
+
+          /*
+            لا نعرض Key القديم.
+            نذهب مباشرة للتسجيل.
+          */
+
+          showOnly(
+            registerPage
+          );
+
+
+          /*
+            نمسح Query من الرابط
+            لكن لا نمسح localStorage
+          */
+
+          clearUrlParameters();
+
+          return;
+        }
+      }
+
+
+      /*
+        إذا لم توجد نتيجة Discord
+        لا نستعمل Key قديم تلقائياً.
+      */
+
+      showOnly(home);
+    }
+
+
+    /* =====================================================
+       REGISTER BUTTON
+       
+       لا يسمح باستعمال Key قديم مخفي.
+       يجب أن يكون هناك Key من Discord.
+    ====================================================== */
+
+    registerButton.addEventListener(
+      "click",
+      function () {
+
+        message.textContent = "";
+
+        newKeyInfo.classList.add(
+          "hidden"
+        );
+
+        discordInfo.classList.add(
+          "hidden"
+        );
+
+
+        const key =
+          getSavedKey();
+
+
+        if (!key) {
+
+          showOnly(
+            registerPage
+          );
+
+          message.textContent =
+            "⚠️ يجب الدخول عبر Discord أولاً للحصول على Access Key جديد.";
+
+          return;
+        }
+
+
+        /*
+          يوجد Key صالح محفوظ.
+        */
+
+        keyInput.value =
+          key;
+
+        showOnly(
+          registerPage
+        );
+      }
+    );
+
+
+    /* =====================================================
+       LOGIN BUTTON
+    ====================================================== */
+
+    loginButton.addEventListener(
+      "click",
+      function () {
+
+        loginMessage.textContent = "";
+
+        showOnly(
+          loginPage
+        );
+      }
+    );
+
+
+    loginFromRegister.addEventListener(
+      "click",
+      function () {
+
+        loginMessage.textContent = "";
+
+        showOnly(
+          loginPage
+        );
+      }
+    );
+
+
+    backButton.addEventListener(
+      "click",
+      function () {
+
+        message.textContent = "";
+
+        showOnly(home);
+      }
+    );
+
+
+    backFromLogin.addEventListener(
+      "click",
+      function () {
+
+        loginMessage.textContent = "";
+
+        showOnly(home);
+      }
+    );
+
+
+    /* =====================================================
+       REGISTER
+    ====================================================== */
+
+    registerForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        message.textContent = "";
+
+        message.classList.remove(
+          "success"
+        );
+
+
+        const username =
+          document.getElementById(
+            "username"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "password"
+          ).value;
+
+
+        const confirmPassword =
+          document.getElementById(
+            "confirm"
+          ).value;
+
+
+        /*
+          مهم:
+          نأخذ الـKey من خانة التسجيل
+          وليس من Key قديم آخر.
+        */
+
+        const key =
+          keyInput.value.trim();
+
+
+        if (!key) {
+
+          message.textContent =
+            "⚠️ يجب الدخول عبر Discord والحصول على مفتاح جديد.";
+
+          return;
+        }
+
+
+        if (
+          !/^N10-[A-Za-z0-9]+$/.test(
+            key
+          )
+        ) {
+
+          message.textContent =
+            "❌ Access Key غير صالح.";
+
+          return;
+        }
+
+
+        if (
+          password !==
+          confirmPassword
+        ) {
+
+          message.textContent =
+            "❌ كلمتا المرور غير متطابقتين.";
+
+          return;
+        }
+
+
+        /*
+          تأكد أن المفتاح الحالي
+          هو نفسه المفتاح الجديد المحفوظ.
+        */
+
+        const savedKey =
+          getSavedKey();
+
+
+        if (
+          savedKey !== key
+        ) {
+
+          message.textContent =
+            "❌ المفتاح الحالي غير مطابق. ادخل Discord من جديد للحصول على مفتاح جديد.";
+
+          return;
+        }
+
+
+        registerButtonSubmit.classList.add(
+          "loading"
+        );
+
+        registerButtonSubmit.textContent =
+          "جاري التسجيل...";
+
+
+        try {
+
+          const response =
+            await fetch(
+              API_URL +
+              "/api/register",
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+                    username,
+                    password,
+                    confirmPassword,
+                    accessKey: key
+                  })
+              }
+            );
+
+
+          const data =
+            await response.json()
+              .catch(
+                () => ({})
+              );
+
+
+          if (!response.ok) {
+
+            message.textContent =
+              data.message ||
+              "حدث خطأ أثناء التسجيل.";
+
+            return;
+          }
+
+
+          /*
+            التسجيل نجح.
+            
+            الـKey أصبح مستعملاً
+            وهذا طبيعي.
+
+            نحفظ Session فقط.
+          */
+
+          if (
+            data.sessionToken
+          ) {
+
+            localStorage.setItem(
+              STORAGE_SESSION,
+              data.sessionToken
+            );
+          }
+
+
+          if (
+            data.accessKey
+          ) {
+
+            /*
+              يبقى نفس Key
+              الخاص بالحساب الحالي.
+            */
+
+            accessKey.value =
+              data.accessKey;
+
+            keyInput.value =
+              data.accessKey;
+
+            localStorage.setItem(
+              STORAGE_ACCESS_KEY,
+              data.accessKey
+            );
+          }
+
+
+          message.textContent =
+            "✅ تم إنشاء الحساب بنجاح.";
+
+          message.classList.add(
+            "success"
+          );
+
+
+          setTimeout(
+            function () {
+
+              showOnly(
+                keyPage
+              );
+
+            },
+            700
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          message.textContent =
+            "❌ Failed to fetch — تعذر الاتصال بالسيرفر. تأكد أن Render يعمل.";
+        }
+
+
+        finally {
+
+          registerButtonSubmit.classList.remove(
+            "loading"
+          );
+
+          registerButtonSubmit.textContent =
+            "REGISTER";
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       LOGIN
+    ====================================================== */
+
+    loginForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        loginMessage.textContent = "";
+
+
+        const username =
+          document.getElementById(
+            "loginUsername"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "loginPassword"
+          ).value;
+
+
+        loginSubmit.classList.add(
+          "loading"
+        );
+
+        loginSubmit.textContent =
+          "جاري الدخول...";
+
+
+        try {
+
+          const response =
+            await fetch(
+              API_URL +
+              "/api/login",
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+                    username,
+                    password
+                  })
+              }
+            );
+
+
+          const data =
+            await response.json()
+              .catch(
+                () => ({})
+              );
+
+
+          if (!response.ok) {
+
+            loginMessage.textContent =
+              data.message ||
+              "اسم المستخدم أو كلمة المرور غير صحيحة.";
+
+            return;
+          }
+
+
+          /*
+            Session جديد
+          */
+
+          if (
+            data.sessionToken
+          ) {
+
+            localStorage.setItem(
+              STORAGE_SESSION,
+              data.sessionToken
+            );
+          }
+
+
+          /*
+            إذا رجع السيرفر Key للحساب
+            نستعمله.
+          */
+
+          if (
+            data.accessKey
+          ) {
+
+            clearOldKey();
+
+            localStorage.setItem(
+              STORAGE_ACCESS_KEY,
+              data.accessKey
+            );
+
+            accessKey.value =
+              data.accessKey;
+          }
+
+
+          loginMessage.textContent =
+            "✅ تم تسجيل الدخول بنجاح.";
+
+
+          setTimeout(
+            function () {
+
+              showOnly(
+                keyPage
+              );
+
+            },
+            500
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          loginMessage.textContent =
+            "❌ Failed to fetch — تعذر الاتصال بالسيرفر.";
+        }
+
+
+        finally {
+
+          loginSubmit.classList.remove(
+            "loading"
+          );
+
+          loginSubmit.textContent =
+            "LOGIN";
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       COPY
+    ====================================================== */
+
+    copyButton.addEventListener(
+      "click",
+      async function () {
+
+        const key =
+          accessKey.value.trim();
+
+
+        if (!key) {
+
+          copyMessage.textContent =
+            "لا يوجد مفتاح.";
+
+          return;
+        }
+
+
+        try {
+
+          await navigator.clipboard.writeText(
+            key
+          );
+
+          copyMessage.textContent =
+            "✅ تم نسخ المفتاح.";
+
+          copyMessage.className =
+            "success";
+
+
+        } catch (error) {
+
+          /*
+            Fallback
+          */
+
+          accessKey.select();
+
+          document.execCommand(
+            "copy"
+          );
+
+          copyMessage.textContent =
+            "✅ تم نسخ المفتاح.";
+
+          copyMessage.className =
+            "success";
+        }
+
+
+        setTimeout(
+          function () {
+
+            copyMessage.textContent = "";
+
+          },
+          2500
+        );
+      }
+    );
+
+
+    /* =====================================================
+       LOGOUT
+    ====================================================== */
+
+    logoutButton.addEventListener(
+      "click",
+      async function () {
+
+        const sessionToken =
+          localStorage.getItem(
+            STORAGE_SESSION
+          );
+
+
+        /*
+          نحاول إلغاء Session في السيرفر.
+        */
+
+        if (sessionToken) {
+
+          try {
+
+            await fetch(
+              API_URL +
+              "/api/logout",
+              {
+                method: "POST",
+
+                headers: {
+                  "Authorization":
+                    "Bearer " +
+                    sessionToken
+                }
+              }
+            );
+
+          } catch (error) {
+
+            console.warn(
+              "Logout request failed:",
+              error
+            );
+          }
+        }
+
+
+        /*
+          مهم جداً:
+          نمسح Key + Session
+          من الجهاز.
+        */
+
+        clearAllAuth();
+
+
+        accessKey.value = "";
+
+        keyInput.value = "";
+
+        copyMessage.textContent = "";
+
+        message.textContent = "";
+
+        loginMessage.textContent = "";
+
+
+        showOnly(home);
+      }
+    );
+
+
+    /* =====================================================
+       ON PAGE LOAD
+    ====================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        /*
+          أول شيء نفحص هل رجعنا من Discord.
+        */
+
+        processDiscordCallback();
+
+      }
+    );
+
+  </script>
 
 </body>
 
