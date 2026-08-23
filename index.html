@@ -184,6 +184,16 @@
       text-align: center;
     }
 
+    .switch a {
+      color: #42a5ff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .switch a:hover {
+      text-decoration: underline;
+    }
+
     .switch button {
       background: none;
       border: none;
@@ -253,6 +263,35 @@
     .logout-btn:hover {
       background: #173b60;
     }
+
+    .cookie {
+      position: fixed;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+      max-width: 430px;
+      margin: auto;
+      background: #0b1c2f;
+      border: 1px solid #23415e;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      color: #c8d9e8;
+      font-size: 13px;
+      z-index: 9999;
+      box-shadow: 0 0 20px rgba(0,0,0,0.35);
+    }
+
+    .cookie button {
+      margin-top: 10px;
+      padding: 9px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #168cff;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -264,26 +303,20 @@
       N10
     </div>
 
-    <h1>
-      N10 SERVER MENA
-    </h1>
+    <h1>N10 SERVER MENA</h1>
 
     <p class="subtitle">
       مرحباً بكم في N10 SERVER MENA
     </p>
 
 
-    <!-- =========================
-         الصفحة الرئيسية
-    ========================== -->
+    <!-- الصفحة الرئيسية -->
 
     <div id="home">
 
       <div class="card">
 
-        <h2>
-          أهلاً وسهلاً 👋
-        </h2>
+        <h2>أهلاً وسهلاً 👋</h2>
 
         <p>
           هذا هو الموقع الرسمي لـ N10 SERVER MENA.
@@ -294,14 +327,11 @@
 
       <div class="card">
 
-        <h2>
-          السيرفر
-        </h2>
+        <h2>السيرفر</h2>
 
         <p>
           سجل دخولك عبر Discord للحصول على Access Key.
         </p>
-
 
         <a
           class="btn"
@@ -310,7 +340,6 @@
           دخول Discord
         </a>
 
-
         <button
           class="btn secondary-btn"
           type="button"
@@ -318,7 +347,6 @@
         >
           إنشاء حساب
         </button>
-
 
         <a
           class="btn secondary-btn"
@@ -332,18 +360,14 @@
     </div>
 
 
-    <!-- =========================
-         إنشاء حساب
-    ========================== -->
+    <!-- إنشاء حساب -->
 
     <div
       id="registerPage"
       class="card hidden"
     >
 
-      <h2>
-        إنشاء حساب
-      </h2>
+      <h2>إنشاء حساب</h2>
 
       <p>
         أنشئ حسابك في N10 SERVER MENA
@@ -357,6 +381,7 @@
         class="discord-info hidden"
       >
         ✅ تم الحصول على Access Key من Discord.
+        <br>
         يمكنك الآن إنشاء حسابك.
       </div>
 
@@ -467,18 +492,12 @@
 
         عندك حساب؟
 
-        <a
-          href="./login.html"
-          style="
-            color:#42a5ff;
-            font-weight:bold;
-            text-decoration:none;
-          "
-        >
+        <a href="./login.html">
           تسجيل الدخول
         </a>
 
-        <br><br>
+        <br>
+        <br>
 
         <button
           type="button"
@@ -492,9 +511,7 @@
     </div>
 
 
-    <!-- =========================
-         صفحة Access Key
-    ========================== -->
+    <!-- صفحة Access Key -->
 
     <div
       id="keyPage"
@@ -505,16 +522,13 @@
         ✅ تم تسجيل الدخول بنجاح
       </div>
 
-
       <h2>
         🔑 مفتاح التفعيل
       </h2>
 
-
       <p>
         هذا هو مفتاح التفعيل الخاص بك:
       </p>
-
 
       <div class="key-box">
 
@@ -524,7 +538,6 @@
           type="text"
           readonly
         >
-
 
         <button
           class="btn copy-btn"
@@ -536,12 +549,10 @@
 
       </div>
 
-
       <p
         id="copyMessage"
         style="margin-top:12px;"
       ></p>
-
 
       <button
         class="btn logout-btn"
@@ -556,13 +567,11 @@
   </div>
 
 
-  <script>
+  <!-- ==========================================
+       JavaScript الخاص بـ index
+  =========================================== -->
 
-    /*
-      =========================
-      قراءة Access Key
-      =========================
-    */
+  <script>
 
     const params =
       new URLSearchParams(
@@ -572,12 +581,8 @@
     const discordAccessKey =
       params.get("accessKey");
 
-
-    /*
-      =========================
-      عناصر الصفحات
-      =========================
-    */
+    const sessionToken =
+      params.get("sessionToken");
 
     const home =
       document.getElementById("home");
@@ -592,12 +597,6 @@
       document.getElementById("logo");
 
 
-    /*
-      =========================
-      الصفحة الرئيسية
-      =========================
-    */
-
     function showHome() {
 
       home.classList.remove("hidden");
@@ -610,12 +609,6 @@
     }
 
 
-    /*
-      =========================
-      صفحة التسجيل
-      =========================
-    */
-
     function showRegister() {
 
       home.classList.add("hidden");
@@ -627,12 +620,6 @@
       logo.innerHTML = "N10";
     }
 
-
-    /*
-      =========================
-      عرض Access Key
-      =========================
-    */
 
     function showKeyPage(accessKey) {
 
@@ -652,24 +639,22 @@
       const keyInput =
         document.getElementById("accessKey");
 
-      keyInput.value = accessKey;
+      if (keyInput) {
+        keyInput.value = accessKey;
+      }
     }
 
 
     /*
-      =========================
-      إذا رجع المستخدم من Discord
-      =========================
+      Discord رجع للموقع
     */
 
     if (discordAccessKey) {
 
       showRegister();
 
-
       const keyInput =
         document.getElementById("key");
-
 
       if (keyInput) {
 
@@ -684,11 +669,8 @@
       const discordInfo =
         document.getElementById("discordInfo");
 
-
       if (discordInfo) {
-
         discordInfo.classList.remove("hidden");
-
       }
 
 
@@ -696,18 +678,21 @@
         '<span class="key-icon">🔑</span>';
 
 
-      /*
-        نخزن المفتاح محلياً
-        حتى يبقى موجوداً
-        إذا انتقل المستخدم للـ Login
-      */
-
       try {
 
         localStorage.setItem(
           "n10AccessKey",
           discordAccessKey
         );
+
+        if (sessionToken) {
+
+          localStorage.setItem(
+            "n10SessionToken",
+            sessionToken
+          );
+
+        }
 
       } catch (error) {
 
@@ -720,7 +705,8 @@
 
 
       /*
-        حذف المفتاح من رابط الصفحة
+        نحذف الـ accessKey والـ sessionToken
+        من الرابط بعد قراءتهم
       */
 
       if (
@@ -740,9 +726,7 @@
 
 
     /*
-      =========================
-      إذا كان المستخدم مسجل دخول
-      =========================
+      إذا كان عنده مفتاح محفوظ
     */
 
     if (!discordAccessKey) {
@@ -754,10 +738,11 @@
             "n10AccessKey"
           );
 
-
         if (savedAccessKey) {
 
-          showKeyPage(savedAccessKey);
+          showKeyPage(
+            savedAccessKey
+          );
 
         }
 
@@ -774,9 +759,7 @@
 
 
     /*
-      =========================
-      نسخ Access Key
-      =========================
+      نسخ المفتاح
     */
 
     async function copyKey() {
@@ -786,15 +769,15 @@
           "accessKey"
         );
 
-
-      if (!input || !input.value) {
+      if (
+        !input ||
+        !input.value
+      ) {
         return;
       }
 
-
       const key =
         input.value;
-
 
       try {
 
@@ -802,12 +785,10 @@
           key
         );
 
-
         const copyMessage =
           document.getElementById(
             "copyMessage"
           );
-
 
         if (copyMessage) {
 
@@ -827,7 +808,6 @@
           0,
           99999
         );
-
 
         try {
 
@@ -878,9 +858,7 @@
 
 
     /*
-      =========================
       تسجيل الخروج
-      =========================
     */
 
     function logout() {
@@ -889,6 +867,10 @@
 
         localStorage.removeItem(
           "n10AccessKey"
+        );
+
+        localStorage.removeItem(
+          "n10SessionToken"
         );
 
         localStorage.removeItem(
@@ -904,7 +886,6 @@
 
       }
 
-
       showHome();
 
     }
@@ -912,7 +893,10 @@
   </script>
 
 
-  <!-- ملف التسجيل -->
+  <!-- ==========================================
+       مهم جداً:
+       ملف التسجيل يكون آخر شيء قبل body
+  =========================================== -->
 
   <script src="./script.js"></script>
 
