@@ -3,9 +3,6 @@
 /* =====================================================
    N10 SERVER MENA
    Frontend Script
-   Compatible with:
-   - index.html
-   - server.js
 ===================================================== */
 
 const API_URL =
@@ -27,131 +24,123 @@ const keyPage =
 const registerButton =
   document.getElementById("registerButton");
 
+const loginButton =
+  document.getElementById("loginButton");
+
+const loginFromRegister =
+  document.getElementById(
+    "loginFromRegister"
+  );
+
 const backButton =
   document.getElementById("backButton");
 
 const registerForm =
-  document.getElementById("registerForm");
-
-const registerSubmit =
   document.getElementById(
-    "registerButtonSubmit"
+    "registerForm"
   );
 
 const message =
   document.getElementById("message");
 
 const discordInfo =
-  document.getElementById("discordInfo");
-
-const usernameInput =
-  document.getElementById("username");
-
-const passwordInput =
-  document.getElementById("password");
-
-const confirmInput =
-  document.getElementById("confirm");
+  document.getElementById(
+    "discordInfo"
+  );
 
 const keyInput =
   document.getElementById("key");
 
-const humanInput =
-  document.getElementById("human");
-
 const accessKeyDisplay =
-  document.getElementById("accessKey");
-
-const copyButton =
-  document.getElementById("copyButton");
-
-const copyMessage =
-  document.getElementById("copyMessage");
-
-const logoutButton =
-  document.getElementById("logoutButton");
-
-/* =====================================================
-   URL PARAMETERS
-===================================================== */
-
-const urlParams =
-  new URLSearchParams(
-    window.location.search
+  document.getElementById(
+    "accessKey"
   );
 
-const accessKeyFromURL =
-  urlParams.get("accessKey");
+const copyButton =
+  document.getElementById(
+    "copyButton"
+  );
 
-const discordStatus =
-  urlParams.get("discord");
+const copyMessage =
+  document.getElementById(
+    "copyMessage"
+  );
 
-const errorFromURL =
-  urlParams.get("error");
-
-const oldDiscordError =
-  urlParams.get("discordError");
-
-/* =====================================================
-   STORAGE HELPERS
-===================================================== */
-
-function saveStorage(
-  key,
-  value
-) {
-  try {
-    if (
-      value !== null &&
-      value !== undefined &&
-      String(value) !== ""
-    ) {
-      localStorage.setItem(
-        key,
-        String(value)
-      );
-    }
-  } catch (error) {
-    console.error(
-      "Storage error:",
-      error
-    );
-  }
-}
-
-function getStorage(key) {
-  try {
-    return localStorage.getItem(key);
-  } catch (error) {
-    console.error(
-      "Storage read error:",
-      error
-    );
-
-    return null;
-  }
-}
-
-function removeStorage(key) {
-  try {
-    localStorage.removeItem(key);
-  } catch (error) {
-    console.error(
-      "Storage remove error:",
-      error
-    );
-  }
-}
+const logoutButton =
+  document.getElementById(
+    "logoutButton"
+  );
 
 /* =====================================================
-   PAGE FUNCTIONS
+   LOCAL STORAGE
 ===================================================== */
 
-function showHome() {
+const STORAGE = {
+  token: "n10SessionToken",
+  username: "n10Username",
+  accessKey: "n10AccessKey"
+};
+
+function saveToken(token) {
+  if (!token) return;
+
+  localStorage.setItem(
+    STORAGE.token,
+    token
+  );
+}
+
+function saveUsername(username) {
+  if (!username) return;
+
+  localStorage.setItem(
+    STORAGE.username,
+    username
+  );
+}
+
+function saveAccessKey(key) {
+  if (!key) return;
+
+  localStorage.setItem(
+    STORAGE.accessKey,
+    key
+  );
+}
+
+function getToken() {
+  return localStorage.getItem(
+    STORAGE.token
+  );
+}
+
+function getAccessKey() {
+  return localStorage.getItem(
+    STORAGE.accessKey
+  );
+}
+
+function clearSession() {
+  localStorage.removeItem(
+    STORAGE.token
+  );
+
+  localStorage.removeItem(
+    STORAGE.username
+  );
+
+  localStorage.removeItem(
+    STORAGE.accessKey
+  );
+}
+
+/* =====================================================
+   PAGE CONTROL
+===================================================== */
+
+function hideAllPages() {
   if (home) {
-    home.classList.remove(
-      "hidden"
-    );
+    home.classList.add("hidden");
   }
 
   if (registerPage) {
@@ -162,43 +151,33 @@ function showHome() {
 
   if (keyPage) {
     keyPage.classList.add(
+      "hidden"
+    );
+  }
+}
+
+function showHome() {
+  hideAllPages();
+
+  if (home) {
+    home.classList.remove(
       "hidden"
     );
   }
 }
 
 function showRegister() {
-  if (home) {
-    home.classList.add(
-      "hidden"
-    );
-  }
+  hideAllPages();
 
   if (registerPage) {
     registerPage.classList.remove(
       "hidden"
     );
   }
-
-  if (keyPage) {
-    keyPage.classList.add(
-      "hidden"
-    );
-  }
 }
 
 function showKeyPage(accessKey) {
-  if (home) {
-    home.classList.add(
-      "hidden"
-    );
-  }
-
-  if (registerPage) {
-    registerPage.classList.add(
-      "hidden"
-    );
-  }
+  hideAllPages();
 
   if (keyPage) {
     keyPage.classList.remove(
@@ -206,11 +185,35 @@ function showKeyPage(accessKey) {
     );
   }
 
-  if (accessKeyDisplay) {
+  if (
+    accessKeyDisplay &&
+    accessKey
+  ) {
     accessKeyDisplay.value =
-      accessKey || "";
+      accessKey;
   }
 }
+
+/* =====================================================
+   URL PARAMETERS
+===================================================== */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const accessKeyFromURL =
+  params.get("accessKey");
+
+const discordError =
+  params.get("discordError");
+
+const sessionTokenFromURL =
+  params.get("sessionToken");
+
+const usernameFromURL =
+  params.get("username");
 
 /* =====================================================
    CLEAN URL
@@ -232,144 +235,73 @@ function cleanURL() {
 }
 
 /* =====================================================
-   MESSAGE
-===================================================== */
-
-function setMessage(
-  text,
-  type = "error"
-) {
-  if (!message) {
-    return;
-  }
-
-  message.textContent =
-    text || "";
-
-  if (type === "success") {
-    message.classList.add(
-      "success"
-    );
-
-    message.classList.remove(
-      "error"
-    );
-
-    message.style.color =
-      "#5cff8a";
-  } else {
-    message.classList.remove(
-      "success"
-    );
-
-    message.classList.add(
-      "error"
-    );
-
-    message.style.color =
-      "#ff5555";
-  }
-}
-
-/* =====================================================
    DISCORD ACCESS KEY
 ===================================================== */
 
-function handleDiscordResult() {
-  /*
-    server.js returns:
+if (accessKeyFromURL) {
+  saveAccessKey(
+    accessKeyFromURL
+  );
 
-    FRONTEND_URL?accessKey=N10-...&discord=new
+  if (keyInput) {
+    keyInput.value =
+      accessKeyFromURL;
 
-    OR
+    keyInput.readOnly = true;
+  }
 
-    FRONTEND_URL?accessKey=N10-...&discord=existing
+  if (discordInfo) {
+    discordInfo.classList.remove(
+      "hidden"
+    );
+  }
 
-    OR
+  showRegister();
 
-    FRONTEND_URL?error=...
-  */
+  cleanURL();
+}
+
+/* =====================================================
+   SESSION FROM URL
+===================================================== */
+
+if (sessionTokenFromURL) {
+  saveToken(
+    sessionTokenFromURL
+  );
+
+  if (usernameFromURL) {
+    saveUsername(
+      usernameFromURL
+    );
+  }
 
   if (accessKeyFromURL) {
-    saveStorage(
-      "n10AccessKey",
+    saveAccessKey(
       accessKeyFromURL
     );
-
-    /*
-      If Discord says this account already exists,
-      don't try to register again.
-      Send the user to login.
-    */
-
-    if (
-      discordStatus ===
-      "existing"
-    ) {
-      showHome();
-
-      setTimeout(() => {
-        window.location.href =
-          "./login.html";
-      }, 700);
-
-      return;
-    }
-
-    /*
-      New Discord user:
-      automatically open registration.
-    */
-
-    if (keyInput) {
-      keyInput.value =
-        accessKeyFromURL;
-
-      keyInput.readOnly = true;
-    }
-
-    if (discordInfo) {
-      discordInfo.classList.remove(
-        "hidden"
-      );
-    }
-
-    showRegister();
-
-    /*
-      Remove Discord parameters
-      only after saving the key.
-    */
-
-    cleanURL();
-
-    return;
   }
 
-  /*
-    Discord cancelled or server returned an error.
-  */
+  cleanURL();
+}
 
-  const discordError =
-    errorFromURL ||
-    oldDiscordError;
+/* =====================================================
+   DISCORD ERROR
+===================================================== */
 
-  if (discordError) {
-    showHome();
+if (discordError) {
+  showHome();
 
-    if (message) {
-      message.style.color =
-        "#ff5555";
+  if (message) {
+    message.textContent =
+      discordError;
 
-      message.textContent =
-        "❌ حدث خطأ أثناء تسجيل الدخول عبر Discord: " +
-        discordError;
-    }
-
-    cleanURL();
-
-    return;
+    message.classList.add(
+      "error"
+    );
   }
+
+  cleanURL();
 }
 
 /* =====================================================
@@ -380,31 +312,18 @@ if (registerButton) {
   registerButton.addEventListener(
     "click",
     () => {
-      /*
-        If there is already a key saved,
-        automatically put it into the form.
-      */
-
       const savedKey =
-        getStorage(
-          "n10AccessKey"
-        );
+        getAccessKey();
 
       if (
-        savedKey &&
         keyInput &&
-        !keyInput.value
+        savedKey
       ) {
         keyInput.value =
           savedKey;
 
-        keyInput.readOnly = true;
-
-        if (discordInfo) {
-          discordInfo.classList.remove(
-            "hidden"
-          );
-        }
+        keyInput.readOnly =
+          true;
       }
 
       showRegister();
@@ -413,7 +332,35 @@ if (registerButton) {
 }
 
 /* =====================================================
-   BACK BUTTON
+   LOGIN BUTTON
+===================================================== */
+
+if (loginButton) {
+  loginButton.addEventListener(
+    "click",
+    () => {
+      window.location.href =
+        "./login.html";
+    }
+  );
+}
+
+/* =====================================================
+   LOGIN FROM REGISTER
+===================================================== */
+
+if (loginFromRegister) {
+  loginFromRegister.addEventListener(
+    "click",
+    () => {
+      window.location.href =
+        "./login.html";
+    }
+  );
+}
+
+/* =====================================================
+   BACK
 ===================================================== */
 
 if (backButton) {
@@ -422,9 +369,9 @@ if (backButton) {
     () => {
       showHome();
 
-      setMessage(
-        ""
-      );
+      if (message) {
+        message.textContent = "";
+      }
     }
   );
 }
@@ -439,41 +386,56 @@ if (registerForm) {
     async (event) => {
       event.preventDefault();
 
-      if (
-        registerSubmit &&
-        registerSubmit.disabled
-      ) {
-        return;
-      }
-
       const username =
-        usernameInput
-          ? usernameInput.value.trim()
-          : "";
+        document
+          .getElementById(
+            "username"
+          )
+          ?.value
+          .trim() || "";
 
       const password =
-        passwordInput
-          ? passwordInput.value
-          : "";
+        document
+          .getElementById(
+            "password"
+          )
+          ?.value || "";
 
       const confirmPassword =
-        confirmInput
-          ? confirmInput.value
-          : "";
+        document
+          .getElementById(
+            "confirm"
+          )
+          ?.value || "";
 
       const accessKey =
-        keyInput
-          ? keyInput.value.trim()
-          : "";
+        document
+          .getElementById(
+            "key"
+          )
+          ?.value
+          .trim() || "";
 
       const human =
-        humanInput
-          ? humanInput.checked
-          : false;
+        document
+          .getElementById(
+            "human"
+          )?.checked || false;
 
-      /* -------------------------------------------------
-         VALIDATION
-      ------------------------------------------------- */
+      if (message) {
+        message.classList.remove(
+          "success"
+        );
+
+        message.classList.add(
+          "error"
+        );
+
+        message.textContent =
+          "";
+      }
+
+      /* VALIDATION */
 
       if (
         !username ||
@@ -481,9 +443,10 @@ if (registerForm) {
         !confirmPassword ||
         !accessKey
       ) {
-        setMessage(
-          "الرجاء ملء جميع الخانات."
-        );
+        if (message) {
+          message.textContent =
+            "الرجاء ملء جميع الخانات.";
+        }
 
         return;
       }
@@ -493,38 +456,36 @@ if (registerForm) {
           username
         )
       ) {
-        setMessage(
-          "اسم المستخدم يجب أن يكون بين 3 و24 حرفاً، ويمكن أن يحتوي على الحروف والأرقام و _ و - و ."
-        );
+        if (message) {
+          message.textContent =
+            "اسم المستخدم يجب أن يكون بين 3 و24 حرفاً ويمكن أن يحتوي على الحروف والأرقام و _ و - و .";
+        }
 
         return;
       }
 
       if (
-        password.length < 6
+        new TextEncoder()
+          .encode(password)
+          .length < 6
       ) {
-        setMessage(
-          "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل."
-        );
+        if (message) {
+          message.textContent =
+            "كلمة المرور يجب أن تحتوي على 6 بايت على الأقل.";
+        }
 
         return;
       }
 
-      /*
-        server.js checks UTF-8 byte length <= 72.
-      */
-
-      const passwordBytes =
-        new TextEncoder().encode(
-          password
-        ).length;
-
       if (
-        passwordBytes > 72
+        new TextEncoder()
+          .encode(password)
+          .length > 72
       ) {
-        setMessage(
-          "كلمة المرور طويلة جداً."
-        );
+        if (message) {
+          message.textContent =
+            "كلمة المرور طويلة جداً.";
+        }
 
         return;
       }
@@ -533,9 +494,10 @@ if (registerForm) {
         password !==
         confirmPassword
       ) {
-        setMessage(
-          "كلمتا المرور غير متطابقتين."
-        );
+        if (message) {
+          message.textContent =
+            "كلمتا المرور غير متطابقتين.";
+        }
 
         return;
       }
@@ -545,44 +507,50 @@ if (registerForm) {
           accessKey
         )
       ) {
-        setMessage(
-          "Access Key غير صالح."
-        );
+        if (message) {
+          message.textContent =
+            "Access Key غير صالح.";
+        }
 
         return;
       }
 
       if (!human) {
-        setMessage(
-          "الرجاء تأكيد أنك إنسان."
-        );
+        if (message) {
+          message.textContent =
+            "الرجاء تأكيد أنك إنسان.";
+        }
 
         return;
       }
 
-      /* -------------------------------------------------
-         LOADING
-      ------------------------------------------------- */
+      /* LOADING */
 
-      setMessage(
-        "جاري إنشاء الحساب..."
-      );
+      const submitButton =
+        document.getElementById(
+          "registerButtonSubmit"
+        );
 
-      if (registerSubmit) {
-        registerSubmit.disabled =
-          true;
-
-        registerSubmit.classList.add(
+      if (submitButton) {
+        submitButton.classList.add(
           "loading"
         );
 
-        registerSubmit.textContent =
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
           "جاري التسجيل...";
       }
 
-      /* -------------------------------------------------
-         REQUEST
-      ------------------------------------------------- */
+      if (message) {
+        message.classList.remove(
+          "error"
+        );
+
+        message.textContent =
+          "جاري إنشاء الحساب...";
+      }
 
       try {
         const response =
@@ -596,12 +564,13 @@ if (registerForm) {
                   "application/json"
               },
 
-              body: JSON.stringify({
-                username,
-                password,
-                confirmPassword,
-                accessKey
-              })
+              body:
+                JSON.stringify({
+                  username,
+                  password,
+                  confirmPassword,
+                  accessKey
+                })
             }
           );
 
@@ -610,94 +579,113 @@ if (registerForm) {
         try {
           data =
             await response.json();
-        } catch (jsonError) {
-          console.error(
-            "JSON error:",
-            jsonError
-          );
+        } catch {
+          data = {};
         }
-
-        /* -------------------------------------------------
-           SERVER ERROR
-        ------------------------------------------------- */
 
         if (!response.ok) {
-          setMessage(
+          throw new Error(
             data.message ||
-            `فشل إنشاء الحساب. رمز الخطأ: ${response.status}`
+            "فشل إنشاء الحساب."
           );
-
-          return;
         }
 
-        /* -------------------------------------------------
-           SUCCESS
-        ------------------------------------------------- */
+        /* SUCCESS */
 
-        setMessage(
-          data.message ||
-          "✅ تم إنشاء الحساب بنجاح!",
-          "success"
-        );
+        if (
+          data.sessionToken
+        ) {
+          saveToken(
+            data.sessionToken
+          );
+        }
 
-        saveStorage(
-          "n10Username",
-          username
-        );
-
-        /*
-          server.js returns accessKey
-          after successful registration.
-        */
-
-        if (data.accessKey) {
-          saveStorage(
-            "n10AccessKey",
+        if (
+          data.accessKey
+        ) {
+          saveAccessKey(
             data.accessKey
           );
         } else {
-          saveStorage(
-            "n10AccessKey",
+          saveAccessKey(
             accessKey
           );
         }
 
-        /*
-          IMPORTANT:
-          Current server.js does NOT return
-          sessionToken during registration,
-          so we don't try to save one here.
-        */
+        saveUsername(
+          username
+        );
 
-        /*
-          Wait a little so the user can see
-          the success message, then go to login.
-        */
+        if (message) {
+          message.classList.remove(
+            "error"
+          );
+
+          message.classList.add(
+            "success"
+          );
+
+          message.textContent =
+            "✅ تم إنشاء الحساب بنجاح!";
+        }
+
+        if (
+          registerForm
+        ) {
+          registerForm.reset();
+        }
+
+        if (keyInput) {
+          keyInput.value =
+            accessKey;
+
+          keyInput.readOnly =
+            true;
+        }
 
         setTimeout(() => {
-          window.location.href =
-            "./login.html";
-        }, 1200);
+          const savedKey =
+            getAccessKey();
+
+          if (savedKey) {
+            showKeyPage(
+              savedKey
+            );
+          } else {
+            window.location.href =
+              "./login.html";
+          }
+        }, 800);
 
       } catch (error) {
         console.error(
-          "Register request error:",
+          "❌ Register Error:",
           error
         );
 
-        setMessage(
-          "❌ تعذر الاتصال بسيرفر N10. تأكد أن السيرفر يعمل ثم حاول مرة أخرى."
-        );
-      } finally {
-        if (registerSubmit) {
-          registerSubmit.disabled =
-            false;
+        if (message) {
+          message.classList.remove(
+            "success"
+          );
 
-          registerSubmit.classList.remove(
+          message.classList.add(
+            "error"
+          );
+
+          message.textContent =
+            error.message ||
+            "❌ تعذر الاتصال بسيرفر N10.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.classList.remove(
             "loading"
           );
 
-          registerSubmit.textContent =
+          submitButton.disabled =
+            false;
+
+          submitButton.textContent =
             "REGISTER";
         }
       }
@@ -715,15 +703,10 @@ if (copyButton) {
     async () => {
       const key =
         accessKeyDisplay
-          ? accessKeyDisplay.value
-          : "";
+          ?.value
+          ?.trim();
 
       if (!key) {
-        if (copyMessage) {
-          copyMessage.textContent =
-            "لا يوجد Access Key لنسخه.";
-        }
-
         return;
       }
 
@@ -733,50 +716,30 @@ if (copyButton) {
         );
 
         if (copyMessage) {
-          copyMessage.style.color =
-            "#5cff8a";
-
           copyMessage.textContent =
             "✅ تم نسخ Access Key.";
+          copyMessage.className =
+            "success";
         }
       } catch (error) {
         console.error(
-          "Clipboard error:",
+          "Copy error:",
           error
         );
 
-        /*
-          Fallback for older browsers.
-        */
-
         if (accessKeyDisplay) {
           accessKeyDisplay.select();
-          accessKeyDisplay.setSelectionRange(
-            0,
-            99999
+
+          document.execCommand(
+            "copy"
           );
+        }
 
-          try {
-            document.execCommand(
-              "copy"
-            );
-
-            if (copyMessage) {
-              copyMessage.style.color =
-                "#5cff8a";
-
-              copyMessage.textContent =
-                "✅ تم نسخ Access Key.";
-            }
-          } catch {
-            if (copyMessage) {
-              copyMessage.style.color =
-                "#ff5555";
-
-              copyMessage.textContent =
-                "❌ لم يتم النسخ. انسخ المفتاح يدوياً.";
-            }
-          }
+        if (copyMessage) {
+          copyMessage.textContent =
+            "✅ تم نسخ Access Key.";
+          copyMessage.className =
+            "success";
         }
       }
     }
@@ -792,9 +755,7 @@ if (logoutButton) {
     "click",
     async () => {
       const token =
-        getStorage(
-          "n10SessionToken"
-        );
+        getToken();
 
       try {
         if (token) {
@@ -815,73 +776,74 @@ if (logoutButton) {
           "Logout error:",
           error
         );
-      } finally {
-        removeStorage(
-          "n10SessionToken"
-        );
-
-        removeStorage(
-          "n10Username"
-        );
-
-        /*
-          Keep Access Key because it may still
-          be needed by the account.
-        */
-
-        showHome();
-
-        if (copyMessage) {
-          copyMessage.textContent =
-            "";
-        }
       }
+
+      clearSession();
+
+      showHome();
     }
   );
 }
 
 /* =====================================================
-   COOKIE SUPPORT
+   RESTORE SESSION
 ===================================================== */
 
-const cookieButton =
-  document.querySelector(
-    ".cookie button"
-  );
+async function restoreSession() {
+  const token =
+    getToken();
 
-if (cookieButton) {
-  cookieButton.addEventListener(
-    "click",
-    () => {
-      const cookie =
-        document.querySelector(
-          ".cookie"
-        );
+  if (!token) {
+    return false;
+  }
 
-      if (cookie) {
-        cookie.remove();
-      }
+  try {
+    const response =
+      await fetch(
+        `${API_URL}/api/user`,
+        {
+          method: "GET",
 
-      saveStorage(
-        "n10CookiesAccepted",
-        "true"
+          headers: {
+            Authorization:
+              `Bearer ${token}`
+          }
+        }
       );
-    }
-  );
-}
 
-if (
-  getStorage(
-    "n10CookiesAccepted"
-  ) === "true"
-) {
-  const cookie =
-    document.querySelector(
-      ".cookie"
+    const data =
+      await response.json();
+
+    if (
+      !response.ok ||
+      !data.success ||
+      !data.user
+    ) {
+      clearSession();
+
+      return false;
+    }
+
+    saveUsername(
+      data.user.username
     );
 
-  if (cookie) {
-    cookie.remove();
+    saveAccessKey(
+      data.user.accessKey
+    );
+
+    showKeyPage(
+      data.user.accessKey
+    );
+
+    return true;
+  } catch (error) {
+    console.error(
+      "Session restore error:",
+      error
+    );
+
+    return false;
   }
 }
 
@@ -889,4 +851,36 @@ if (
    INITIAL PAGE
 ===================================================== */
 
-handleDiscordResult();
+(async function init() {
+  /* Discord key has priority */
+
+  if (accessKeyFromURL) {
+    return;
+  }
+
+  if (discordError) {
+    return;
+  }
+
+  const restored =
+    await restoreSession();
+
+  if (restored) {
+    return;
+  }
+
+  const savedKey =
+    getAccessKey();
+
+  if (
+    savedKey &&
+    !getToken()
+  ) {
+    if (keyInput) {
+      keyInput.value =
+        savedKey;
+    }
+  }
+
+  showHome();
+})();
