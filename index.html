@@ -3,7 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>N10 SERVER MENA</title>
 
@@ -17,6 +21,7 @@
 
     body {
       min-height: 100vh;
+
       background:
         radial-gradient(
           circle at top,
@@ -24,36 +29,58 @@
           #071525 45%,
           #03070d 100%
         );
+
       color: white;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       padding: 20px;
     }
 
     .container {
       width: 100%;
       max-width: 430px;
+
       background: rgba(8, 20, 36, 0.95);
+
       border: 1px solid #168cff;
+
       border-radius: 24px;
+
       padding: 30px 22px;
-      box-shadow: 0 0 35px rgba(0, 140, 255, 0.25);
+
+      box-shadow:
+        0 0 35px rgba(0, 140, 255, 0.25);
+
       text-align: center;
     }
 
     .logo {
       width: 95px;
       height: 95px;
+
       margin: 0 auto 18px;
+
       border-radius: 24px;
-      background: linear-gradient(145deg, #168cff, #0051a8);
+
+      background:
+        linear-gradient(
+          145deg,
+          #168cff,
+          #0051a8
+        );
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       font-size: 42px;
       font-weight: bold;
-      box-shadow: 0 0 25px rgba(22, 140, 255, 0.45);
+
+      box-shadow:
+        0 0 25px rgba(22, 140, 255, 0.45);
     }
 
     .key-icon {
@@ -74,8 +101,11 @@
 
     .card {
       background: rgba(255, 255, 255, 0.04);
+
       border-radius: 16px;
+
       padding: 18px;
+
       margin-bottom: 16px;
     }
 
@@ -93,16 +123,27 @@
 
     .btn {
       display: block;
+
       width: 100%;
+
       padding: 14px;
+
       margin-top: 12px;
+
       border: none;
+
       border-radius: 14px;
+
       background: #168cff;
+
       color: white;
+
       text-decoration: none;
+
       font-weight: bold;
+
       font-size: 16px;
+
       cursor: pointer;
     }
 
@@ -125,120 +166,92 @@
 
     .form-group label {
       display: block;
+
       color: #a9c9e8;
+
       font-size: 13px;
+
       margin-bottom: 7px;
     }
 
     .form-group input {
       width: 100%;
+
       padding: 13px;
+
       border: 1px solid #168cff;
+
       border-radius: 12px;
+
       background: #071525;
+
       color: white;
+
       outline: none;
+
       direction: ltr;
+
       text-align: left;
+
       font-size: 15px;
     }
 
     .form-group input:focus {
       border-color: #42a5ff;
-      box-shadow: 0 0 12px rgba(22, 140, 255, 0.25);
+
+      box-shadow:
+        0 0 12px
+        rgba(22, 140, 255, 0.25);
     }
 
     .human {
       display: flex;
+
       align-items: center;
+
       gap: 8px;
+
       background: #071525;
+
       border: 1px solid #23415e;
+
       padding: 12px;
+
       border-radius: 12px;
+
       margin: 15px 0;
+
       color: #c8d9e8;
+
       font-size: 13px;
+
       cursor: pointer;
     }
 
     .human input {
       width: 18px;
       height: 18px;
+
       accent-color: #168cff;
+
       cursor: pointer;
     }
 
     #message {
       min-height: 22px;
+
       margin-top: 12px;
+
       font-size: 13px;
+
       color: #ff5555;
+
       text-align: center;
-    }
-
-    .switch {
-      color: #a9c9e8;
-      font-size: 13px;
-      margin-top: 16px;
-      text-align: center;
-    }
-
-    .switch a {
-      color: #42a5ff;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .switch a:hover {
-      text-decoration: underline;
-    }
-
-    .switch button {
-      background: none;
-      border: none;
-      color: #42a5ff;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .switch button:hover {
-      text-decoration: underline;
-    }
-
-    .key-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .key-input {
-      flex: 1;
-      min-width: 0;
-      padding: 13px 10px;
-      border: 1px solid #168cff;
-      border-radius: 12px;
-      background: #071525;
-      color: white;
-      font-size: 13px;
-      text-align: center;
-      direction: ltr;
-    }
-
-    .copy-btn {
-      width: auto;
-      margin: 0;
-      padding: 13px 15px;
-      white-space: nowrap;
     }
 
     .success {
-      color: #5cff8a;
+      color: #5cff8a !important;
       font-weight: bold;
-      margin-bottom: 8px;
-      text-align: center;
     }
 
     .hidden {
@@ -246,14 +259,64 @@
     }
 
     .discord-info {
-      background: rgba(22, 140, 255, 0.08);
+      background:
+        rgba(22, 140, 255, 0.08);
+
       border: 1px solid #23415e;
+
       border-radius: 12px;
+
       padding: 12px;
+
       margin-bottom: 15px;
+
       color: #c8d9e8;
+
       font-size: 13px;
+
       line-height: 1.6;
+    }
+
+    .key-box {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 15px;
+    }
+
+    .key-input {
+      flex: 1;
+
+      min-width: 0;
+
+      padding: 13px 10px;
+
+      border: 1px solid #168cff;
+
+      border-radius: 12px;
+
+      background: #071525;
+
+      color: white;
+
+      font-size: 13px;
+
+      text-align: center;
+
+      direction: ltr;
+    }
+
+    .copy-btn {
+      width: auto;
+
+      margin: 0;
+
+      padding: 13px 15px;
+
+      white-space: nowrap;
     }
 
     .logout-btn {
@@ -264,33 +327,13 @@
       background: #173b60;
     }
 
-    .cookie {
-      position: fixed;
-      bottom: 15px;
-      left: 15px;
-      right: 15px;
-      max-width: 430px;
-      margin: auto;
-      background: #0b1c2f;
-      border: 1px solid #23415e;
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      color: #c8d9e8;
-      font-size: 13px;
-      z-index: 9999;
-      box-shadow: 0 0 20px rgba(0,0,0,0.35);
+    .loading {
+      opacity: 0.65;
+      pointer-events: none;
     }
 
-    .cookie button {
-      margin-top: 10px;
-      padding: 9px 20px;
-      border: none;
-      border-radius: 10px;
-      background: #168cff;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
+    .error {
+      color: #ff5555 !important;
     }
   </style>
 </head>
@@ -299,24 +342,30 @@
 
   <div class="container">
 
-    <div class="logo" id="logo">
+    <div
+      class="logo"
+      id="logo"
+    >
       N10
     </div>
 
-    <h1>N10 SERVER MENA</h1>
+    <h1>
+      N10 SERVER MENA
+    </h1>
 
     <p class="subtitle">
       مرحباً بكم في N10 SERVER MENA
     </p>
 
-
-    <!-- الصفحة الرئيسية -->
+    <!-- HOME -->
 
     <div id="home">
 
       <div class="card">
 
-        <h2>أهلاً وسهلاً 👋</h2>
+        <h2>
+          أهلاً وسهلاً 👋
+        </h2>
 
         <p>
           هذا هو الموقع الرسمي لـ N10 SERVER MENA.
@@ -324,10 +373,11 @@
 
       </div>
 
-
       <div class="card">
 
-        <h2>السيرفر</h2>
+        <h2>
+          السيرفر
+        </h2>
 
         <p>
           سجل دخولك عبر Discord للحصول على Access Key.
@@ -343,7 +393,7 @@
         <button
           class="btn secondary-btn"
           type="button"
-          onclick="showRegister()"
+          id="registerButton"
         >
           إنشاء حساب
         </button>
@@ -359,15 +409,16 @@
 
     </div>
 
-
-    <!-- إنشاء حساب -->
+    <!-- REGISTER -->
 
     <div
       id="registerPage"
       class="card hidden"
     >
 
-      <h2>إنشاء حساب</h2>
+      <h2>
+        إنشاء حساب
+      </h2>
 
       <p>
         أنشئ حسابك في N10 SERVER MENA
@@ -375,16 +426,13 @@
 
       <br>
 
-
       <div
         id="discordInfo"
         class="discord-info hidden"
       >
         ✅ تم الحصول على Access Key من Discord.
-        <br>
         يمكنك الآن إنشاء حسابك.
       </div>
-
 
       <form id="registerForm">
 
@@ -406,7 +454,6 @@
 
         </div>
 
-
         <div class="form-group">
 
           <label for="password">
@@ -417,13 +464,13 @@
             id="password"
             type="password"
             minlength="6"
+            maxlength="72"
             placeholder="Password"
             autocomplete="new-password"
             required
           >
 
         </div>
-
 
         <div class="form-group">
 
@@ -435,13 +482,13 @@
             id="confirm"
             type="password"
             minlength="6"
+            maxlength="72"
             placeholder="Confirm Password"
             autocomplete="new-password"
             required
           >
 
         </div>
-
 
         <div class="form-group">
 
@@ -459,7 +506,6 @@
 
         </div>
 
-
         <label class="human">
 
           <input
@@ -474,34 +520,46 @@
 
         </label>
 
-
         <button
+          id="registerButtonSubmit"
           class="btn"
           type="submit"
         >
           REGISTER
         </button>
 
-
         <p id="message"></p>
 
       </form>
 
-
-      <div class="switch">
+      <div
+        style="
+          margin-top:18px;
+          text-align:center;
+          font-size:13px;
+          color:#a9c9e8;
+        "
+      >
 
         عندك حساب؟
 
-        <a href="./login.html">
+        <a
+          href="./login.html"
+          style="
+            color:#42a5ff;
+            font-weight:bold;
+            text-decoration:none;
+          "
+        >
           تسجيل الدخول
         </a>
 
-        <br>
-        <br>
+        <br><br>
 
         <button
+          id="backButton"
           type="button"
-          onclick="showHome()"
+          class="btn secondary-btn"
         >
           رجوع
         </button>
@@ -510,8 +568,7 @@
 
     </div>
 
-
-    <!-- صفحة Access Key -->
+    <!-- KEY -->
 
     <div
       id="keyPage"
@@ -540,9 +597,9 @@
         >
 
         <button
+          id="copyButton"
           class="btn copy-btn"
           type="button"
-          onclick="copyKey()"
         >
           📋 نسخ
         </button>
@@ -555,9 +612,9 @@
       ></p>
 
       <button
+        id="logoutButton"
         class="btn logout-btn"
         type="button"
-        onclick="logout()"
       >
         تسجيل الخروج
       </button>
@@ -565,338 +622,6 @@
     </div>
 
   </div>
-
-
-  <!-- ==========================================
-       JavaScript الخاص بـ index
-  =========================================== -->
-
-  <script>
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    const discordAccessKey =
-      params.get("accessKey");
-
-    const sessionToken =
-      params.get("sessionToken");
-
-    const home =
-      document.getElementById("home");
-
-    const registerPage =
-      document.getElementById("registerPage");
-
-    const keyPage =
-      document.getElementById("keyPage");
-
-    const logo =
-      document.getElementById("logo");
-
-
-    function showHome() {
-
-      home.classList.remove("hidden");
-
-      registerPage.classList.add("hidden");
-
-      keyPage.classList.add("hidden");
-
-      logo.innerHTML = "N10";
-    }
-
-
-    function showRegister() {
-
-      home.classList.add("hidden");
-
-      registerPage.classList.remove("hidden");
-
-      keyPage.classList.add("hidden");
-
-      logo.innerHTML = "N10";
-    }
-
-
-    function showKeyPage(accessKey) {
-
-      if (!accessKey) {
-        return;
-      }
-
-      home.classList.add("hidden");
-
-      registerPage.classList.add("hidden");
-
-      keyPage.classList.remove("hidden");
-
-      logo.innerHTML =
-        '<span class="key-icon">🔑</span>';
-
-      const keyInput =
-        document.getElementById("accessKey");
-
-      if (keyInput) {
-        keyInput.value = accessKey;
-      }
-    }
-
-
-    /*
-      Discord رجع للموقع
-    */
-
-    if (discordAccessKey) {
-
-      showRegister();
-
-      const keyInput =
-        document.getElementById("key");
-
-      if (keyInput) {
-
-        keyInput.value =
-          discordAccessKey;
-
-        keyInput.readOnly = true;
-
-      }
-
-
-      const discordInfo =
-        document.getElementById("discordInfo");
-
-      if (discordInfo) {
-        discordInfo.classList.remove("hidden");
-      }
-
-
-      logo.innerHTML =
-        '<span class="key-icon">🔑</span>';
-
-
-      try {
-
-        localStorage.setItem(
-          "n10AccessKey",
-          discordAccessKey
-        );
-
-        if (sessionToken) {
-
-          localStorage.setItem(
-            "n10SessionToken",
-            sessionToken
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "LocalStorage Error:",
-          error
-        );
-
-      }
-
-
-      /*
-        نحذف الـ accessKey والـ sessionToken
-        من الرابط بعد قراءتهم
-      */
-
-      if (
-        window.history &&
-        window.history.replaceState
-      ) {
-
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-
-      }
-
-    }
-
-
-    /*
-      إذا كان عنده مفتاح محفوظ
-    */
-
-    if (!discordAccessKey) {
-
-      try {
-
-        const savedAccessKey =
-          localStorage.getItem(
-            "n10AccessKey"
-          );
-
-        if (savedAccessKey) {
-
-          showKeyPage(
-            savedAccessKey
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "LocalStorage Error:",
-          error
-        );
-
-      }
-
-    }
-
-
-    /*
-      نسخ المفتاح
-    */
-
-    async function copyKey() {
-
-      const input =
-        document.getElementById(
-          "accessKey"
-        );
-
-      if (
-        !input ||
-        !input.value
-      ) {
-        return;
-      }
-
-      const key =
-        input.value;
-
-      try {
-
-        await navigator.clipboard.writeText(
-          key
-        );
-
-        const copyMessage =
-          document.getElementById(
-            "copyMessage"
-          );
-
-        if (copyMessage) {
-
-          copyMessage.textContent =
-            "✅ تم نسخ المفتاح";
-
-          copyMessage.style.color =
-            "#5cff8a";
-
-        }
-
-      } catch (error) {
-
-        input.select();
-
-        input.setSelectionRange(
-          0,
-          99999
-        );
-
-        try {
-
-          document.execCommand("copy");
-
-          const copyMessage =
-            document.getElementById(
-              "copyMessage"
-            );
-
-          if (copyMessage) {
-
-            copyMessage.textContent =
-              "✅ تم نسخ المفتاح";
-
-            copyMessage.style.color =
-              "#5cff8a";
-
-          }
-
-        } catch (copyError) {
-
-          console.error(
-            "Copy Error:",
-            copyError
-          );
-
-          const copyMessage =
-            document.getElementById(
-              "copyMessage"
-            );
-
-          if (copyMessage) {
-
-            copyMessage.textContent =
-              "❌ تعذر نسخ المفتاح";
-
-            copyMessage.style.color =
-              "#ff5555";
-
-          }
-
-        }
-
-      }
-
-    }
-
-
-    /*
-      تسجيل الخروج
-    */
-
-    function logout() {
-
-      try {
-
-        localStorage.removeItem(
-          "n10AccessKey"
-        );
-
-        localStorage.removeItem(
-          "n10SessionToken"
-        );
-
-        localStorage.removeItem(
-          "n10User"
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Logout Error:",
-          error
-        );
-
-      }
-
-      showHome();
-
-    }
-
-  </script>
-
-
-  <!-- ==========================================
-       مهم جداً:
-       ملف التسجيل يكون آخر شيء قبل body
-  =========================================== -->
 
   <script src="./script.js"></script>
 
