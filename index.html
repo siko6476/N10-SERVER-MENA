@@ -21,7 +21,6 @@
 
     body {
       min-height: 100vh;
-
       background:
         radial-gradient(
           circle at top,
@@ -29,62 +28,43 @@
           #071525 45%,
           #03070d 100%
         );
-
       color: white;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       padding: 20px;
     }
 
     .container {
       width: 100%;
       max-width: 430px;
-
       background: rgba(8, 20, 36, 0.95);
-
       border: 1px solid #168cff;
-
       border-radius: 24px;
-
       padding: 30px 22px;
-
       box-shadow:
         0 0 35px rgba(0, 140, 255, 0.25);
-
       text-align: center;
     }
 
     .logo {
       width: 95px;
       height: 95px;
-
       margin: 0 auto 18px;
-
       border-radius: 24px;
-
       background:
         linear-gradient(
           145deg,
           #168cff,
           #0051a8
         );
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 42px;
       font-weight: bold;
-
       box-shadow:
         0 0 25px rgba(22, 140, 255, 0.45);
-    }
-
-    .key-icon {
-      font-size: 48px;
     }
 
     h1 {
@@ -101,11 +81,8 @@
 
     .card {
       background: rgba(255, 255, 255, 0.04);
-
       border-radius: 16px;
-
       padding: 18px;
-
       margin-bottom: 16px;
     }
 
@@ -123,27 +100,16 @@
 
     .btn {
       display: block;
-
       width: 100%;
-
       padding: 14px;
-
       margin-top: 12px;
-
       border: none;
-
       border-radius: 14px;
-
       background: #168cff;
-
       color: white;
-
       text-decoration: none;
-
       font-weight: bold;
-
       font-size: 16px;
-
       cursor: pointer;
     }
 
@@ -166,39 +132,26 @@
 
     .form-group label {
       display: block;
-
       color: #a9c9e8;
-
       font-size: 13px;
-
       margin-bottom: 7px;
     }
 
     .form-group input {
       width: 100%;
-
       padding: 13px;
-
       border: 1px solid #168cff;
-
       border-radius: 12px;
-
       background: #071525;
-
       color: white;
-
       outline: none;
-
       direction: ltr;
-
       text-align: left;
-
       font-size: 15px;
     }
 
     .form-group input:focus {
       border-color: #42a5ff;
-
       box-shadow:
         0 0 12px
         rgba(22, 140, 255, 0.25);
@@ -206,46 +159,30 @@
 
     .human {
       display: flex;
-
       align-items: center;
-
       gap: 8px;
-
       background: #071525;
-
       border: 1px solid #23415e;
-
       padding: 12px;
-
       border-radius: 12px;
-
       margin: 15px 0;
-
       color: #c8d9e8;
-
       font-size: 13px;
-
       cursor: pointer;
     }
 
     .human input {
       width: 18px;
       height: 18px;
-
       accent-color: #168cff;
-
       cursor: pointer;
     }
 
     #message {
       min-height: 22px;
-
       margin-top: 12px;
-
       font-size: 13px;
-
       color: #ff5555;
-
       text-align: center;
     }
 
@@ -261,61 +198,39 @@
     .discord-info {
       background:
         rgba(22, 140, 255, 0.08);
-
       border: 1px solid #23415e;
-
       border-radius: 12px;
-
       padding: 12px;
-
       margin-bottom: 15px;
-
       color: #c8d9e8;
-
       font-size: 13px;
-
       line-height: 1.6;
     }
 
     .key-box {
       display: flex;
-
       align-items: center;
-
       gap: 8px;
-
       margin-top: 15px;
     }
 
     .key-input {
       flex: 1;
-
       min-width: 0;
-
       padding: 13px 10px;
-
       border: 1px solid #168cff;
-
       border-radius: 12px;
-
       background: #071525;
-
       color: white;
-
       font-size: 13px;
-
       text-align: center;
-
       direction: ltr;
     }
 
     .copy-btn {
       width: auto;
-
       margin: 0;
-
       padding: 13px 15px;
-
       white-space: nowrap;
     }
 
@@ -335,6 +250,12 @@
     .error {
       color: #ff5555 !important;
     }
+
+    .link {
+      color: #42a5ff;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -349,9 +270,7 @@
       N10
     </div>
 
-    <h1>
-      N10 SERVER MENA
-    </h1>
+    <h1>N10 SERVER MENA</h1>
 
     <p class="subtitle">
       مرحباً بكم في N10 SERVER MENA
@@ -398,12 +317,13 @@
           إنشاء حساب
         </button>
 
-        <a
+        <button
           class="btn secondary-btn"
-          href="./login.html"
+          type="button"
+          id="loginButton"
         >
           تسجيل الدخول
-        </a>
+        </button>
 
       </div>
 
@@ -543,16 +463,18 @@
 
         عندك حساب؟
 
-        <a
-          href="./login.html"
+        <button
+          id="loginFromRegister"
+          type="button"
+          class="link"
           style="
-            color:#42a5ff;
-            font-weight:bold;
-            text-decoration:none;
+            background:none;
+            border:none;
+            cursor:pointer;
           "
         >
           تسجيل الدخول
-        </a>
+        </button>
 
         <br><br>
 
@@ -568,7 +490,7 @@
 
     </div>
 
-    <!-- KEY -->
+    <!-- KEY PAGE -->
 
     <div
       id="keyPage"
