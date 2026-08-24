@@ -17,7 +17,6 @@
 
     body {
       min-height: 100vh;
-
       background:
         radial-gradient(
           circle at top,
@@ -25,102 +24,68 @@
           #071525 45%,
           #03070d 100%
         );
-
       color: white;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       padding: 20px;
     }
 
     .container {
       width: 100%;
       max-width: 430px;
-
       background: rgba(8, 20, 36, 0.95);
-
       border: 1px solid #168cff;
       border-radius: 24px;
-
       padding: 30px 22px;
-
-      box-shadow:
-        0 0 35px rgba(0, 140, 255, 0.25);
-
+      box-shadow: 0 0 35px rgba(0, 140, 255, 0.25);
       text-align: center;
     }
 
     .logo {
       width: 95px;
       height: 95px;
-
       margin: 0 auto 18px;
-
       border-radius: 24px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #168cff,
-          #0051a8
-        );
-
+      background: linear-gradient(145deg, #168cff, #0051a8);
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 38px;
       font-weight: bold;
-
-      box-shadow:
-        0 0 25px rgba(22, 140, 255, 0.45);
+      box-shadow: 0 0 25px rgba(22, 140, 255, 0.45);
     }
 
     h1 {
       color: #42a5ff;
-
       font-size: 28px;
-
       margin-bottom: 8px;
     }
 
     .subtitle {
       color: #a9c9e8;
-
       font-size: 14px;
-
       margin-bottom: 25px;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.04);
-
       border-radius: 16px;
-
       padding: 20px;
-
       text-align: right;
     }
 
     .card h2 {
       color: #42a5ff;
-
       text-align: center;
-
       margin-bottom: 8px;
     }
 
     .description {
       color: #c8d9e8;
-
       font-size: 14px;
-
       line-height: 1.7;
-
       text-align: center;
-
       margin-bottom: 20px;
     }
 
@@ -130,64 +95,40 @@
 
     label {
       display: block;
-
       color: #a9c9e8;
-
       font-size: 13px;
-
       margin-bottom: 7px;
     }
 
     input {
       width: 100%;
-
       padding: 14px;
-
       border: 1px solid #168cff;
-
       border-radius: 12px;
-
       background: #071525;
-
       color: white;
-
       outline: none;
-
       font-size: 15px;
-
       direction: ltr;
-
       text-align: left;
     }
 
     input:focus {
       border-color: #42a5ff;
-
-      box-shadow:
-        0 0 12px rgba(22, 140, 255, 0.3);
+      box-shadow: 0 0 12px rgba(22, 140, 255, 0.3);
     }
 
     .btn {
       width: 100%;
-
       padding: 14px;
-
       margin-top: 8px;
-
       border: none;
-
       border-radius: 14px;
-
       background: #168cff;
-
       color: white;
-
       font-weight: bold;
-
       font-size: 16px;
-
       cursor: pointer;
-
       transition: 0.2s;
     }
 
@@ -197,19 +138,14 @@
 
     .btn:disabled {
       opacity: 0.65;
-
       cursor: not-allowed;
     }
 
     #message {
       min-height: 22px;
-
       margin-top: 15px;
-
       text-align: center;
-
       font-size: 14px;
-
       line-height: 1.5;
     }
 
@@ -223,19 +159,14 @@
 
     .links {
       text-align: center;
-
       margin-top: 20px;
-
       color: #a9c9e8;
-
       font-size: 13px;
     }
 
     .links a {
       color: #42a5ff;
-
       text-decoration: none;
-
       font-weight: bold;
     }
 
@@ -245,12 +176,10 @@
 
     .loading {
       opacity: 0.7;
-
       pointer-events: none;
     }
   </style>
 </head>
-
 
 <body>
 
@@ -260,16 +189,13 @@
       N10
     </div>
 
-
     <h1>
       N10 SERVER MENA
     </h1>
 
-
     <p class="subtitle">
       تسجيل الدخول إلى حسابك
     </p>
-
 
     <div class="card">
 
@@ -277,11 +203,9 @@
         🔐 تسجيل الدخول
       </h2>
 
-
       <p class="description">
         أدخل اسم المستخدم وكلمة المرور للدخول إلى حسابك.
       </p>
-
 
       <form id="loginForm">
 
@@ -304,7 +228,6 @@
 
         </div>
 
-
         <div class="form-group">
 
           <label for="password">
@@ -323,7 +246,6 @@
 
         </div>
 
-
         <button
           id="loginButton"
           class="btn"
@@ -332,11 +254,9 @@
           LOGIN
         </button>
 
-
         <p id="message"></p>
 
       </form>
-
 
       <div class="links">
 
@@ -352,20 +272,31 @@
 
   </div>
 
-
   <script>
+    "use strict";
 
-    /*
-      رابط السيرفر
-    */
+    /* =====================================================
+       N10 SERVER MENA
+       LOGIN
+    ===================================================== */
 
     const API_URL =
       "https://n10-discord-backend-new.onrender.com";
 
+    /* =====================================================
+       STORAGE
+    ===================================================== */
 
-    /*
-      عناصر الصفحة
-    */
+    const STORAGE = {
+      token: "n10SessionToken",
+      username: "n10Username",
+      accessKey: "n10AccessKey",
+      user: "n10User"
+    };
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
     const form =
       document.getElementById("loginForm");
@@ -382,281 +313,334 @@
     const passwordInput =
       document.getElementById("password");
 
+    /* =====================================================
+       HELPERS
+    ===================================================== */
 
-    /*
-      تسجيل الدخول
-    */
-
-    form.addEventListener("submit", async (e) => {
-
-      e.preventDefault();
-
-
-      /*
-        أخذ البيانات
-      */
-
-      const username =
-        usernameInput.value.trim();
-
-      const password =
-        passwordInput.value;
-
-
-      /*
-        التحقق من البيانات
-      */
-
-      if (!username) {
-
-        message.className = "error";
-
-        message.textContent =
-          "الرجاء إدخال اسم المستخدم.";
-
-        usernameInput.focus();
-
-        return;
-      }
-
-
-      if (!password) {
-
-        message.className = "error";
-
-        message.textContent =
-          "الرجاء إدخال كلمة المرور.";
-
-        passwordInput.focus();
-
-        return;
-      }
-
-
-      /*
-        حالة التحميل
-      */
-
-      message.className = "";
-
+    function showError(text) {
+      message.className = "error";
       message.textContent =
-        "جاري تسجيل الدخول...";
+        text || "حدث خطأ.";
+    }
 
-      loginButton.disabled = true;
+    function showSuccess(text) {
+      message.className = "success";
+      message.textContent =
+        text || "تم تسجيل الدخول بنجاح.";
+    }
 
-      loginButton.classList.add("loading");
+    function setLoading(loading) {
+
+      loginButton.disabled =
+        loading;
+
+      loginButton.classList.toggle(
+        "loading",
+        loading
+      );
 
       loginButton.textContent =
-        "جاري الدخول...";
+        loading
+          ? "جاري الدخول..."
+          : "LOGIN";
+    }
 
+    function isValidAccessKey(key) {
 
-      try {
+      if (
+        typeof key !== "string"
+      ) {
+        return false;
+      }
 
-        /*
-          إرسال طلب تسجيل الدخول
-        */
+      return /^N10-[A-Za-z0-9]+$/.test(
+        key.trim()
+      );
+    }
 
-        const response =
-          await fetch(
-            `${API_URL}/api/login`,
-            {
-              method: "POST",
+    /* =====================================================
+       LOGIN
+    ===================================================== */
 
-              headers: {
-                "Content-Type":
-                  "application/json",
+    form.addEventListener(
+      "submit",
+      async function (event) {
 
-                "Accept":
-                  "application/json"
-              },
+        event.preventDefault();
 
-              body: JSON.stringify({
-                username: username,
-                password: password
-              })
-            }
+        const username =
+          usernameInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+        /* ================= VALIDATION ================= */
+
+        if (!username) {
+
+          showError(
+            "الرجاء إدخال اسم المستخدم."
           );
 
+          usernameInput.focus();
 
-        /*
-          قراءة رد السيرفر
-          بطريقة آمنة
-        */
+          return;
+        }
 
-        let data = {};
+        if (!password) {
 
-        const contentType =
-          response.headers.get(
-            "content-type"
-          ) || "";
+          showError(
+            "الرجاء إدخال كلمة المرور."
+          );
 
+          passwordInput.focus();
+
+          return;
+        }
 
         if (
-          contentType.includes(
-            "application/json"
-          )
+          username.length < 3 ||
+          username.length > 24
         ) {
 
-          try {
+          showError(
+            "اسم المستخدم غير صالح."
+          );
 
-            data =
-              await response.json();
+          return;
+        }
 
-          } catch {
+        /* ================= LOADING ================= */
 
-            data = {};
+        message.className = "";
+
+        message.textContent =
+          "جاري الاتصال بالسيرفر...";
+
+        setLoading(true);
+
+        try {
+
+          /* ================= REQUEST ================= */
+
+          const response =
+            await fetch(
+              `${API_URL}/api/login`,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json",
+
+                  "Accept":
+                    "application/json"
+                },
+
+                credentials: "include",
+
+                body:
+                  JSON.stringify({
+                    username,
+                    password
+                  })
+              }
+            );
+
+          /* ================= RESPONSE ================= */
+
+          let data = {};
+
+          const contentType =
+            response.headers.get(
+              "content-type"
+            ) || "";
+
+          if (
+            contentType.includes(
+              "application/json"
+            )
+          ) {
+
+            try {
+
+              data =
+                await response.json();
+
+            } catch {
+
+              data = {};
+
+            }
+
+          } else {
+
+            const text =
+              await response.text();
+
+            data = {
+              message: text
+            };
 
           }
 
-        }
+          /* ================= ERROR ================= */
 
+          if (!response.ok) {
 
-        /*
-          تسجيل الدخول فشل
-        */
+            throw new Error(
+              data.message ||
+              data.error ||
+              `فشل تسجيل الدخول. HTTP ${response.status}`
+            );
 
-        if (!response.ok) {
+          }
 
-          message.className = "error";
+          if (
+            data.success === false
+          ) {
 
-          message.textContent =
-            data.message ||
-            "اسم المستخدم أو كلمة المرور غير صحيحة.";
+            throw new Error(
+              data.message ||
+              "اسم المستخدم أو كلمة المرور غير صحيحة."
+            );
 
-          return;
-        }
+          }
 
+          /* ================= TOKEN ================= */
 
-        /*
-          حفظ معلومات المستخدم
-          إذا أرسلها السيرفر
-        */
+          const sessionToken =
+            data.sessionToken ||
+            data.token ||
+            data.accessToken ||
+            null;
 
-        if (data.user) {
+          if (sessionToken) {
 
-          localStorage.setItem(
-            "n10User",
-            JSON.stringify(data.user)
-          );
+            localStorage.setItem(
+              STORAGE.token,
+              String(sessionToken)
+            );
 
-        }
+          }
 
+          /* ================= USER ================= */
 
-        /*
-          البحث عن Access Key
-        */
+          const user =
+            data.user ||
+            null;
 
-        const accessKey =
-          data.accessKey ||
-          data.access_key ||
-          (
-            data.user &&
+          if (user) {
+
+            localStorage.setItem(
+              STORAGE.user,
+              JSON.stringify(user)
+            );
+
+            if (
+              user.username
+            ) {
+
+              localStorage.setItem(
+                STORAGE.username,
+                String(user.username)
+              );
+
+            }
+
+          } else {
+
+            localStorage.setItem(
+              STORAGE.username,
+              username
+            );
+
+          }
+
+          /* ================= ACCESS KEY ================= */
+
+          const accessKey =
+            data.accessKey ||
+            data.access_key ||
             (
-              data.user.accessKey ||
-              data.user.access_key
-            )
-          ) ||
-          null;
+              user &&
+              (
+                user.accessKey ||
+                user.access_key
+              )
+            ) ||
+            null;
 
+          if (
+            accessKey &&
+            isValidAccessKey(accessKey)
+          ) {
 
-        /*
-          نجاح تسجيل الدخول
-        */
+            localStorage.setItem(
+              STORAGE.accessKey,
+              accessKey.trim()
+            );
 
-        message.className =
-          "success";
+          }
 
-        message.textContent =
-          "✅ تم تسجيل الدخول بنجاح!";
+          /* ================= SUCCESS ================= */
 
-
-        /*
-          إذا وجدنا Access Key
-        */
-
-        if (accessKey) {
-
-          /*
-            حفظ المفتاح محلياً
-          */
-
-          localStorage.setItem(
-            "n10AccessKey",
-            accessKey
+          showSuccess(
+            "✅ تم تسجيل الدخول بنجاح!"
           );
 
-
           /*
-            تحويل المستخدم
-            إلى الصفحة الرئيسية
+             إذا السيرفر أعطانا Session Token
+             أو Access Key، ننتقل إلى الصفحة الرئيسية.
           */
 
-          setTimeout(() => {
+          setTimeout(
+            function () {
 
-            window.location.href =
-              "./index.html";
+              window.location.href =
+                "./index.html";
 
-          }, 800);
+            },
+            600
+          );
 
-          return;
+        } catch (error) {
+
+          console.error(
+            "N10 LOGIN ERROR:",
+            error
+          );
+
+          if (
+            error instanceof TypeError ||
+            error.message ===
+              "Failed to fetch"
+          ) {
+
+            showError(
+              "❌ تعذر الاتصال بـ Render. تأكد من CORS وأن السيرفر يعمل."
+            );
+
+          } else {
+
+            showError(
+              "❌ " +
+              (
+                error.message ||
+                "فشل تسجيل الدخول."
+              )
+            );
+
+          }
+
+        } finally {
+
+          setLoading(false);
+
         }
-
-
-        /*
-          إذا لم يوجد Access Key
-        */
-
-        if (
-          data.user &&
-          data.user.username
-        ) {
-
-          setTimeout(() => {
-
-            message.textContent =
-              `✅ مرحباً ${data.user.username}`;
-
-          }, 800);
-
-        }
-
-
-      } catch (error) {
-
-        /*
-          خطأ في الاتصال بالسيرفر
-        */
-
-        console.error(
-          "N10 Login Error:",
-          error
-        );
-
-
-        message.className =
-          "error";
-
-        message.textContent =
-          "❌ تعذر الاتصال بسيرفر N10. حاول مرة أخرى.";
-
-      } finally {
-
-        /*
-          إعادة الزر لحالته الطبيعية
-        */
-
-        loginButton.disabled = false;
-
-        loginButton.classList.remove(
-          "loading"
-        );
-
-        loginButton.textContent =
-          "LOGIN";
 
       }
-
-    });
+    );
 
   </script>
 
