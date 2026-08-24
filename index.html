@@ -1,97 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>N10 Server - Sign In</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
+
       min-height: 100vh;
+
       font-family: Arial, sans-serif;
-      background: #111;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #1e3a8a 0%,
+          #0f172a 45%,
+          #020617 100%
+        );
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       color: white;
     }
 
     .container {
       width: 90%;
-      max-width: 420px;
-      background: #1d1d1d;
-      border-radius: 20px;
-      padding: 35px 25px;
+
+      max-width: 430px;
+
+      background: rgba(15, 23, 42, 0.95);
+
+      border: 1px solid rgba(88, 101, 242, 0.35);
+
+      border-radius: 24px;
+
+      padding: 40px 28px;
+
       text-align: center;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.25);
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(88, 101, 242, 0.18);
     }
 
     .logo {
       width: 110px;
+
       height: 110px;
-      margin: auto;
-      border-radius: 25px;
-      background: #050505;
+
+      margin: 0 auto 20px;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #5865f2,
+          #3b4cca
+        );
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
-      font-size: 70px;
-      font-weight: bold;
-      color: #ff0000;
+
+      font-size: 68px;
+
+      font-weight: 900;
+
+      color: white;
+
+      box-shadow:
+        0 10px 30px rgba(88, 101, 242, 0.4);
     }
 
     h1 {
-      color: #ff2020;
-      margin: 20px 0 10px;
+      margin: 10px 0;
+
+      font-size: 30px;
+
+      color: white;
+
+      letter-spacing: 1px;
     }
 
-    p {
-      color: #aaa;
-      margin-bottom: 30px;
+    .subtitle {
+      color: #aab4d0;
+
+      font-size: 15px;
+
+      margin: 0 0 30px;
     }
 
     .discord-btn {
       width: 100%;
-      padding: 15px;
+
+      padding: 16px;
+
       border: none;
-      border-radius: 10px;
-      background: #5865F2;
+
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5865f2,
+          #4752c4
+        );
+
       color: white;
+
       font-size: 17px;
+
       font-weight: bold;
+
       cursor: pointer;
+
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        opacity 0.2s;
     }
 
     .discord-btn:hover {
-      opacity: 0.9;
+      opacity: 0.95;
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 10px 25px rgba(88, 101, 242, 0.35);
+    }
+
+    .discord-btn:active {
+      transform: scale(0.98);
+    }
+
+    .discord-icon {
+      margin-right: 8px;
+
+      font-size: 20px;
     }
 
     .footer {
-      margin-top: 25px;
-      color: #666;
+      margin-top: 28px;
+
+      color: #64748b;
+
       font-size: 12px;
     }
+
+    .status {
+      margin-top: 18px;
+
+      font-size: 12px;
+
+      color: #60a5fa;
+    }
+
+    @media (max-width: 480px) {
+
+      .container {
+        padding: 32px 22px;
+      }
+
+      .logo {
+        width: 95px;
+        height: 95px;
+        font-size: 58px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+    }
+
   </style>
+
 </head>
 
 <body>
 
   <div class="container">
 
-    <div class="logo">N</div>
+    <div class="logo">
+      N
+    </div>
 
-    <h1>N10 SERVER</h1>
+    <h1>
+      N10 SERVER
+    </h1>
 
-    <p>Sign in using your Discord account</p>
+    <p class="subtitle">
+      Sign in using your Discord account
+    </p>
 
-    <button class="discord-btn" onclick="loginDiscord()">
+    <button
+      class="discord-btn"
+      onclick="loginDiscord()"
+    >
+      <span class="discord-icon">◉</span>
       SIGN IN WITH DISCORD
     </button>
+
+    <div class="status">
+      ● Secure Discord Authentication
+    </div>
 
     <div class="footer">
       N10 Community Server
@@ -100,10 +233,16 @@
   </div>
 
   <script>
+
     function loginDiscord() {
-      window.location.href = "/auth/discord";
+
+      window.location.href =
+        "/auth/discord";
+
     }
+
   </script>
 
 </body>
+
 </html>
