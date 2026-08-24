@@ -82,7 +82,6 @@
     .card h2 {
       color: #42a5ff;
       margin-bottom: 10px;
-      text-align: center;
     }
 
     .card p {
@@ -116,6 +115,14 @@
 
     .secondary-btn:hover {
       background: #12436f;
+    }
+
+    .logout-btn {
+      background: #102943;
+    }
+
+    .logout-btn:hover {
+      background: #173b60;
     }
 
     .form-group {
@@ -170,11 +177,11 @@
     }
 
     #message,
-    #loginMessage {
+    #loginMessage,
+    #copyMessage {
       min-height: 22px;
       margin-top: 12px;
       font-size: 13px;
-      color: #ff5555;
       text-align: center;
     }
 
@@ -213,17 +220,6 @@
       line-height: 1.6;
     }
 
-    .warning {
-      background: rgba(255, 85, 85, 0.08);
-      border: 1px solid rgba(255, 85, 85, 0.3);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 15px;
-      color: #ffaaaa;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
     .key-box {
       display: flex;
       align-items: center;
@@ -249,14 +245,6 @@
       margin: 0;
       padding: 13px 15px;
       white-space: nowrap;
-    }
-
-    .logout-btn {
-      background: #102943;
-    }
-
-    .logout-btn:hover {
-      background: #173b60;
     }
 
     .loading {
@@ -286,9 +274,7 @@
 
 <div class="container">
 
-  <div class="logo">
-    N10
-  </div>
+  <div class="logo">N10</div>
 
   <h1>N10 SERVER MENA</h1>
 
@@ -297,15 +283,13 @@
   </p>
 
 
-  <!-- ================= HOME ================= -->
+  <!-- HOME -->
 
   <div id="home">
 
     <div class="card">
 
-      <h2>
-        أهلاً وسهلاً 👋
-      </h2>
+      <h2>أهلاً وسهلاً 👋</h2>
 
       <p>
         هذا هو الموقع الرسمي لـ N10 SERVER MENA.
@@ -316,9 +300,7 @@
 
     <div class="card">
 
-      <h2>
-        السيرفر
-      </h2>
+      <h2>السيرفر</h2>
 
       <p>
         سجل دخولك عبر Discord للحصول على Access Key جديد.
@@ -353,16 +335,14 @@
   </div>
 
 
-  <!-- ================= REGISTER ================= -->
+  <!-- REGISTER -->
 
   <div
     id="registerPage"
     class="card hidden"
   >
 
-    <h2>
-      إنشاء حساب
-    </h2>
+    <h2>إنشاء حساب</h2>
 
     <p>
       أنشئ حسابك في N10 SERVER MENA
@@ -370,16 +350,14 @@
 
     <br>
 
-
     <div
       id="newKeyInfo"
       class="new-key-info hidden"
     >
       ✅ تم الحصول على Access Key جديد من Discord.
       <br>
-      تم حذف المفتاح القديم من المتصفح واستعمال المفتاح الجديد.
+      المفتاح القديم تم حذفه واستعمال المفتاح الجديد.
     </div>
-
 
     <div
       id="discordInfo"
@@ -491,7 +469,6 @@
         REGISTER
       </button>
 
-
       <p id="message"></p>
 
     </form>
@@ -531,16 +508,14 @@
   </div>
 
 
-  <!-- ================= LOGIN ================= -->
+  <!-- LOGIN -->
 
   <div
     id="loginPage"
     class="card hidden"
   >
 
-    <h2>
-      تسجيل الدخول
-    </h2>
+    <h2>تسجيل الدخول</h2>
 
     <p>
       سجل الدخول إلى حسابك
@@ -591,7 +566,6 @@
         LOGIN
       </button>
 
-
       <p id="loginMessage"></p>
 
     </form>
@@ -608,7 +582,7 @@
   </div>
 
 
-  <!-- ================= KEY PAGE ================= -->
+  <!-- KEY PAGE -->
 
   <div
     id="keyPage"
@@ -648,10 +622,7 @@
     </div>
 
 
-    <p
-      id="copyMessage"
-      style="margin-top:12px;"
-    ></p>
+    <p id="copyMessage"></p>
 
 
     <button
@@ -804,20 +775,17 @@ function showPage(page) {
 
 function isValidKey(key) {
 
-  if (
-    typeof key !== "string"
-  ) {
-    return false;
-  }
-
-  return /^N10-[A-Za-z0-9]+$/.test(
-    key.trim()
+  return (
+    typeof key === "string" &&
+    /^N10-[A-Za-z0-9]+$/.test(
+      key.trim()
+    )
   );
 }
 
 
 /* =====================================================
-   GET KEY
+   GET CURRENT KEY
 ===================================================== */
 
 function getKey() {
@@ -836,8 +804,7 @@ function getKey() {
 
 
 /* =====================================================
-   IMPORTANT:
-   DELETE OLD KEY LOCALLY
+   DELETE OLD KEY
 ===================================================== */
 
 function deleteOldKey() {
@@ -867,7 +834,9 @@ function deleteOldKey() {
 function replaceKeyWithNewKey(newKey) {
 
   if (!isValidKey(newKey)) {
+
     deleteOldKey();
+
     return false;
   }
 
@@ -876,14 +845,14 @@ function replaceKeyWithNewKey(newKey) {
 
 
   /*
-    1. حذف القديم
+    حذف أي مفتاح قديم
   */
 
   deleteOldKey();
 
 
   /*
-    2. حفظ الجديد فقط
+    حفظ المفتاح الجديد فقط
   */
 
   localStorage.setItem(
@@ -893,19 +862,16 @@ function replaceKeyWithNewKey(newKey) {
 
 
   /*
-    3. تحديث الواجهة
+    تحديث الواجهة
   */
 
   if (keyInput) {
-    keyInput.value =
-      newKey;
+    keyInput.value = newKey;
   }
 
   if (accessKeyDisplay) {
-    accessKeyDisplay.value =
-      newKey;
+    accessKeyDisplay.value = newKey;
   }
-
 
   return true;
 }
@@ -917,13 +883,16 @@ function replaceKeyWithNewKey(newKey) {
 
 function saveSession(token) {
 
-  if (!token) {
+  if (
+    typeof token !== "string" ||
+    !token.trim()
+  ) {
     return;
   }
 
   localStorage.setItem(
     TOKEN_STORAGE,
-    token
+    token.trim()
   );
 }
 
@@ -984,8 +953,8 @@ function cleanURL() {
 
   } catch (error) {
 
-    console.error(
-      "URL cleanup:",
+    console.warn(
+      "URL cleanup error:",
       error
     );
 
@@ -1008,35 +977,31 @@ function handleDiscordCallback() {
   const newKey =
     params.get("accessKey");
 
-
   const token =
     params.get("sessionToken");
 
-
   const username =
     params.get("username");
-
 
   const error =
     params.get("discordError");
 
 
   /*
-    إذا Discord أعطى خطأ
+    Discord error
   */
 
   if (error) {
 
     deleteOldKey();
 
-    showPage(home);
-
     message.textContent =
       "❌ " + error;
 
-    message.classList.add(
-      "error"
-    );
+    message.className =
+      "error";
+
+    showPage(home);
 
     cleanURL();
 
@@ -1045,15 +1010,13 @@ function handleDiscordCallback() {
 
 
   /*
-    إذا رجع Key جديد من Discord
+    Discord رجع Access Key جديد
   */
 
   if (newKey) {
 
     /*
-      هنا بالضبط:
-      القديم يتحذف
-      والجديد يدخل مكانه
+      حذف القديم وحفظ الجديد
     */
 
     const success =
@@ -1066,14 +1029,13 @@ function handleDiscordCallback() {
 
       deleteOldKey();
 
-      showPage(home);
-
       message.textContent =
         "❌ Access Key الذي أرسله Discord غير صالح.";
 
-      message.classList.add(
-        "error"
-      );
+      message.className =
+        "error";
+
+      showPage(home);
 
       cleanURL();
 
@@ -1082,13 +1044,17 @@ function handleDiscordCallback() {
 
 
     /*
-      إذا جاء Session كذلك
+      حفظ Session إذا موجود
     */
 
     if (token) {
       saveSession(token);
     }
 
+
+    /*
+      حفظ Username
+    */
 
     if (username) {
 
@@ -1101,7 +1067,7 @@ function handleDiscordCallback() {
 
 
     /*
-      إظهار أن المفتاح جديد
+      عرض معلومات المفتاح الجديد
     */
 
     newKeyInfo.classList.remove(
@@ -1122,7 +1088,7 @@ function handleDiscordCallback() {
 
 
     /*
-      نذهب مباشرة إلى إنشاء الحساب
+      الانتقال للتسجيل
     */
 
     showPage(
@@ -1131,8 +1097,8 @@ function handleDiscordCallback() {
 
 
     /*
-      حذف الـQuery من الرابط
-      بدون حذف الـKey
+      حذف accessKey من URL
+      بعد تخزينه
     */
 
     cleanURL();
@@ -1155,20 +1121,12 @@ registerButton.addEventListener(
 
     message.textContent = "";
 
-    message.classList.remove(
-      "success",
-      "error"
-    );
+    message.className = "";
 
 
     const key =
       getKey();
 
-
-    /*
-      لا نستعمل Key قديم
-      من أجل التسجيل.
-    */
 
     if (!key) {
 
@@ -1181,9 +1139,8 @@ registerButton.addEventListener(
       message.textContent =
         "⚠️ ادخل عبر Discord أولاً للحصول على Access Key جديد.";
 
-      message.classList.add(
-        "error"
-      );
+      message.className =
+        "error";
 
       return;
     }
@@ -1194,6 +1151,7 @@ registerButton.addEventListener(
 
     keyInput.readOnly =
       true;
+
 
     showPage(
       registerPage
@@ -1233,6 +1191,8 @@ loginFromRegister.addEventListener(
 
     loginMessage.textContent = "";
 
+    loginMessage.className = "";
+
     showPage(
       loginPage
     );
@@ -1242,7 +1202,7 @@ loginFromRegister.addEventListener(
 
 
 /* =====================================================
-   BACK
+   BACK BUTTONS
 ===================================================== */
 
 backButton.addEventListener(
@@ -1282,10 +1242,7 @@ registerForm.addEventListener(
 
     message.textContent = "";
 
-    message.classList.remove(
-      "success",
-      "error"
-    );
+    message.className = "";
 
 
     const username =
@@ -1324,6 +1281,9 @@ registerForm.addEventListener(
       message.textContent =
         "❌ أدخل اسم المستخدم.";
 
+      message.className =
+        "error";
+
       return;
     }
 
@@ -1337,31 +1297,38 @@ registerForm.addEventListener(
       message.textContent =
         "❌ اسم المستخدم يجب أن يكون بين 3 و24 حرفاً.";
 
+      message.className =
+        "error";
+
       return;
     }
 
 
-    if (
+    const passwordBytes =
       new TextEncoder()
         .encode(password)
-        .length < 6
-    ) {
+        .length;
+
+
+    if (passwordBytes < 6) {
 
       message.textContent =
         "❌ كلمة المرور قصيرة جداً.";
 
+      message.className =
+        "error";
+
       return;
     }
 
 
-    if (
-      new TextEncoder()
-        .encode(password)
-        .length > 72
-    ) {
+    if (passwordBytes > 72) {
 
       message.textContent =
         "❌ كلمة المرور طويلة جداً.";
+
+      message.className =
+        "error";
 
       return;
     }
@@ -1375,6 +1342,9 @@ registerForm.addEventListener(
       message.textContent =
         "❌ كلمتا المرور غير متطابقتين.";
 
+      message.className =
+        "error";
+
       return;
     }
 
@@ -1383,6 +1353,9 @@ registerForm.addEventListener(
 
       message.textContent =
         "❌ أكد أنك إنسان.";
+
+      message.className =
+        "error";
 
       return;
     }
@@ -1393,12 +1366,16 @@ registerForm.addEventListener(
       message.textContent =
         "❌ لا يوجد Access Key صالح. ادخل عبر Discord.";
 
+      message.className =
+        "error";
+
       return;
     }
 
 
     /*
-      تأكيد أن هذا هو آخر Key محفوظ.
+      نتأكد أن المفتاح الموجود
+      هو آخر مفتاح محفوظ.
     */
 
     const currentKey =
@@ -1411,6 +1388,9 @@ registerForm.addEventListener(
 
       message.textContent =
         "❌ هذا المفتاح ليس المفتاح الحالي. ادخل Discord من جديد.";
+
+      message.className =
+        "error";
 
       return;
     }
@@ -1448,11 +1428,12 @@ registerForm.addEventListener(
             },
 
             /*
-              مهم إذا كان Backend
-              يستعمل Cookies.
+              مهم:
+              Backend الحالي لا يستعمل
+              Cookies/Credentials.
             */
 
-            credentials: "include",
+            credentials: "omit",
 
             body:
               JSON.stringify({
@@ -1480,16 +1461,15 @@ registerForm.addEventListener(
           data.error ||
           "فشل إنشاء الحساب."
         );
+
       }
 
 
       /*
-        التسجيل نجح.
+        Session جديد
       */
 
-      if (
-        data.sessionToken
-      ) {
+      if (data.sessionToken) {
 
         saveSession(
           data.sessionToken
@@ -1498,32 +1478,25 @@ registerForm.addEventListener(
       }
 
 
-      if (
-        data.username
-      ) {
+      /*
+        Username
+      */
 
-        localStorage.setItem(
-          USER_STORAGE,
-          data.username
-        );
+      const savedUsername =
+        data.user &&
+        data.user.username
+          ? data.user.username
+          : username;
 
-      } else {
 
-        localStorage.setItem(
-          USER_STORAGE,
-          username
-        );
-
-      }
+      localStorage.setItem(
+        USER_STORAGE,
+        savedUsername
+      );
 
 
       /*
-        إذا Backend رجع Key
-        نستعمله.
-
-        إذا لم يرجعه:
-        نستعمل نفس Key الذي
-        استعملناه في التسجيل.
+        Access Key النهائي
       */
 
       const finalKey =
@@ -1535,20 +1508,28 @@ registerForm.addEventListener(
 
 
       /*
-        نخزن فقط Key الحالي.
+        حذف القديم
+        وحفظ الجديد/الحالي فقط
       */
 
-      replaceKeyWithNewKey(
-        finalKey
-      );
+      if (
+        !replaceKeyWithNewKey(
+          finalKey
+        )
+      ) {
+
+        throw new Error(
+          "السيرفر لم يرجع Access Key صالح."
+        );
+
+      }
 
 
       message.textContent =
         "✅ تم إنشاء الحساب بنجاح.";
 
-      message.classList.add(
-        "success"
-      );
+      message.className =
+        "success";
 
 
       setTimeout(
@@ -1574,18 +1555,12 @@ registerForm.addEventListener(
       );
 
 
-      /*
-        هذا هو Failed to fetch
-        الحقيقي.
-      */
-
       if (
-        error.name ===
-        "TypeError"
+        error instanceof TypeError
       ) {
 
         message.textContent =
-          "❌ Failed to fetch — المتصفح لم يستطع الاتصال بـ Render. المشكلة غالباً في CORS أو أن السيرفر متوقف.";
+          "❌ Failed to fetch — تعذر الاتصال بـ Render. تحقق من CORS أو حالة السيرفر.";
 
       } else {
 
@@ -1598,9 +1573,9 @@ registerForm.addEventListener(
 
       }
 
-      message.classList.add(
-        "error"
-      );
+      message.className =
+        "error";
+
 
     } finally {
 
@@ -1653,6 +1628,18 @@ loginForm.addEventListener(
         .value;
 
 
+    if (!username || !password) {
+
+      loginMessage.textContent =
+        "❌ أدخل اسم المستخدم وكلمة المرور.";
+
+      loginMessage.className =
+        "error";
+
+      return;
+    }
+
+
     loginSubmit.disabled =
       true;
 
@@ -1678,7 +1665,11 @@ loginForm.addEventListener(
                 "application/json"
             },
 
-            credentials: "include",
+            /*
+              لا نستعمل Cookies.
+            */
+
+            credentials: "omit",
 
             body:
               JSON.stringify({
@@ -1712,9 +1703,7 @@ loginForm.addEventListener(
         Session
       */
 
-      if (
-        data.sessionToken
-      ) {
+      if (data.sessionToken) {
 
         saveSession(
           data.sessionToken
@@ -1724,7 +1713,31 @@ loginForm.addEventListener(
 
 
       /*
-        Key الحساب.
+        Username
+      */
+
+      if (
+        data.user &&
+        data.user.username
+      ) {
+
+        localStorage.setItem(
+          USER_STORAGE,
+          data.user.username
+        );
+
+      } else {
+
+        localStorage.setItem(
+          USER_STORAGE,
+          username
+        );
+
+      }
+
+
+      /*
+        Access Key
       */
 
       if (
@@ -1732,11 +1745,6 @@ loginForm.addEventListener(
           data.accessKey
         )
       ) {
-
-        /*
-          يمسح القديم
-          ويحفظ الحالي.
-        */
 
         replaceKeyWithNewKey(
           data.accessKey
@@ -1765,9 +1773,8 @@ loginForm.addEventListener(
       loginMessage.textContent =
         "✅ تم تسجيل الدخول بنجاح.";
 
-      loginMessage.classList.add(
-        "success"
-      );
+      loginMessage.className =
+        "success";
 
 
       setTimeout(
@@ -1791,12 +1798,11 @@ loginForm.addEventListener(
 
 
       if (
-        error.name ===
-        "TypeError"
+        error instanceof TypeError
       ) {
 
         loginMessage.textContent =
-          "❌ Failed to fetch — تعذر الاتصال بـ Render. تأكد من CORS والسيرفر.";
+          "❌ Failed to fetch — تعذر الاتصال بـ Render. تحقق من CORS أو حالة السيرفر.";
 
       } else {
 
@@ -1809,9 +1815,9 @@ loginForm.addEventListener(
 
       }
 
-      loginMessage.classList.add(
-        "error"
-      );
+      loginMessage.className =
+        "error";
+
 
     } finally {
 
@@ -1846,7 +1852,10 @@ copyButton.addEventListener(
     if (!key) {
 
       copyMessage.textContent =
-        "لا يوجد Access Key.";
+        "❌ لا يوجد Access Key.";
+
+      copyMessage.className =
+        "error";
 
       return;
     }
@@ -1858,13 +1867,6 @@ copyButton.addEventListener(
         key
       );
 
-      copyMessage.textContent =
-        "✅ تم نسخ Access Key.";
-
-      copyMessage.className =
-        "success";
-
-
     } catch (error) {
 
       accessKeyDisplay.select();
@@ -1873,19 +1875,22 @@ copyButton.addEventListener(
         "copy"
       );
 
-      copyMessage.textContent =
-        "✅ تم نسخ Access Key.";
-
-      copyMessage.className =
-        "success";
-
     }
+
+
+    copyMessage.textContent =
+      "✅ تم نسخ Access Key.";
+
+    copyMessage.className =
+      "success";
 
 
     setTimeout(
       function () {
 
         copyMessage.textContent = "";
+
+        copyMessage.className = "";
 
       },
       2500
@@ -1908,8 +1913,23 @@ logoutButton.addEventListener(
 
 
     /*
-      نحاول تسجيل الخروج
-      من السيرفر.
+      نحذف البيانات المحلية أولاً.
+      لا نعتمد على Cookies.
+    */
+
+    clearEverything();
+
+
+    message.textContent = "";
+
+    loginMessage.textContent = "";
+
+    copyMessage.textContent = "";
+
+
+    /*
+      إذا عندنا Token
+      نحاول إلغاء Session في السيرفر.
     */
 
     if (token) {
@@ -1928,7 +1948,7 @@ logoutButton.addEventListener(
                 token
             },
 
-            credentials: "include"
+            credentials: "omit"
           }
         );
 
@@ -1944,20 +1964,6 @@ logoutButton.addEventListener(
     }
 
 
-    /*
-      مسح كل شيء محلياً.
-    */
-
-    clearEverything();
-
-
-    message.textContent = "";
-
-    loginMessage.textContent = "";
-
-    copyMessage.textContent = "";
-
-
     showPage(home);
 
   }
@@ -1971,9 +1977,9 @@ logoutButton.addEventListener(
 (function start() {
 
   /*
-    نفحص Discord أولاً.
-    إذا رجع Key جديد:
-    القديم يمسح والجديد يستعمل.
+    مهم:
+    إذا Discord رجع Access Key جديد،
+    نمسح القديم ونستعمل الجديد.
   */
 
   const handled =
@@ -1986,8 +1992,8 @@ logoutButton.addEventListener(
 
 
   /*
-    لا نفتح Key قديم تلقائياً.
-    فقط الصفحة الرئيسية.
+    لا نعرض مفتاح قديم تلقائياً.
+    الصفحة تبدأ من Home.
   */
 
   showPage(home);
