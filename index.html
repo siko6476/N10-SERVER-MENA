@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N10 Server - Sign In</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 420px;
+      background: #1d1d1d;
+      border-radius: 20px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.25);
+    }
+
+    .logo {
+      width: 110px;
+      height: 110px;
+      margin: auto;
+      border-radius: 25px;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 70px;
+      font-weight: bold;
+      color: #ff0000;
+    }
+
+    h1 {
+      color: #ff2020;
+      margin: 20px 0 10px;
+    }
+
+    p {
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    .discord-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #5865F2;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .discord-btn:hover {
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin-top: 25px;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">N</div>
+
+    <h1>N10 SERVER</h1>
+
+    <p>Sign in using your Discord account</p>
+
+    <button class="discord-btn" onclick="loginDiscord()">
+      SIGN IN WITH DISCORD
+    </button>
+
+    <div class="footer">
+      N10 Community Server
+    </div>
+
+  </div>
+
+  <script>
+    function loginDiscord() {
+      window.location.href = "/auth/discord";
+    }
+  </script>
+
+</body>
+</html>
